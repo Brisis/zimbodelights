@@ -28,7 +28,7 @@
         <a href="#!" class="category-wrap">
             <div class="content-part">
                 <h2>{{ $category->name }}</h2>
-                <h4>{{ count($category->products) }} items</h4>
+                <h4>{{ count($products) }} items</h4>
             </div>
             <div class="img-part">
                 <img src="{{ asset($category->picture) }}" class="img-fluid" alt="">

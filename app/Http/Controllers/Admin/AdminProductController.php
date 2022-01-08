@@ -72,11 +72,15 @@ class AdminProductController extends Controller
     elseif ($request->status == 'is_special') {
       $product->is_special = true;
     }
+    elseif($request->status == 'is_foodies'){
+      $product->is_foodies = true;
+    }
     else {
       $product->is_deal = false;
       $product->is_trending = false;
       $product->is_top = false;
       $product->is_special = false;
+      $product->is_foodies = false;
     }
 
     $product->save();

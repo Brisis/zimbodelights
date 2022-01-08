@@ -14,6 +14,10 @@ class ProductController extends Controller
 {
   public function product(Product $product)
   {
+    if ($product->is_draft) {
+      return redirect()->route('home');
+    }
+
     $products = Product::where('category_id', $product->category->id)
     ->where('is_draft', false)
     ->whereNotIn('id',[$product->id])
@@ -61,7 +65,7 @@ class ProductController extends Controller
       'description' => 'required'
     ]);
 
-    $review = $request->user()->reviews()->create([
+    auth()->user()->reviews()->create([
       'product_id' => $product->id,
       'rating' => $request->rating,
       'description' => $request->description

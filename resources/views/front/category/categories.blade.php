@@ -30,7 +30,7 @@
           <a href="{{ route('categories.category', $category->slug) }}" class="category-wrap">
               <div class="content-part">
                   <h2 class="text-uppercase">{{ $category->name }}</h2>
-                  <h4> {{ count($category->products) }} items</h4>
+                  <h4> {{ count($category->products->where('is_draft', false)) }} items</h4>
               </div>
               <div class="img-part">
                   <img src="{{ asset($category->picture) }}" class="img-fluid" alt="">

@@ -146,6 +146,7 @@
                                 <option value="is_trending">Is Trending</option>
                                 <option value="is_top">Is Top Picks</option>
                                 <option value="is_special">Is Specials</option>
+                                <option value="is_foodies">Is Foodies</option>
                             </select>
                         </div>
 
@@ -170,6 +171,7 @@
                     @foreach($images as $image)
                     <div class="col-4 mb-3">
                       <form class="" action="{{ route('admin.products.delete_image', $image->id) }}" method="post">
+                        @csrf
                         <div class="mb-3">
                           <img class="img-thumbnail" style="width: 12rem" src="{{ asset($image->thumbnail) }}" alt="image">
                         </div>
@@ -194,10 +196,10 @@
                             <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab"
                                aria-controls="description" aria-selected="true">Description</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" id="reviews-tab" data-bs-toggle="tab" href="#reviews" role="tab"
-                               aria-controls="reviews" aria-selected="false">Reviews (3)</a>
-                        </li>
+                               aria-controls="reviews" aria-selected="false">Reviews ({{ count($product->reviews) }})</a>
+                        </li> -->
                     </ul>
                 </div>
                 <div class="card-body">
@@ -206,7 +208,7 @@
                              aria-labelledby="description-tab">
                             <p>{{ $product->description }}</p>
                         </div>
-                        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                        <!-- <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                             <div class="row">
                                 <div class="col-lg-8">
                                     <div class="mb-5">
@@ -241,50 +243,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="list-group-item d-flex px-0">
-                                            <div class="avatar flex-shrink-0 me-3">
-                                                <span class="avatar-text bg-orange rounded-circle">C</span>
-                                            </div>
-                                            <div>
-                                                <h5 class="mb-1">Corly Hailston</h5>
-                                                <div class="d-flex gap-2 mb-3">
-                                                    <i class="bi bi-star-fill text-warning"></i>
-                                                    <i class="bi bi-star-fill text-warning"></i>
-                                                    <i class="bi bi-star-fill text-warning"></i>
-                                                    <i class="bi bi-star-fill text-warning"></i>
-                                                    <i class="bi bi-star-fill text-warning"></i>
-                                                </div>
-                                                <div>I love your products. It is very easy and fun to use this panel. I would
-                                                    recommend it
-                                                    to
-                                                    everyone.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item d-flex px-0">
-                                            <div class="avatar flex-shrink-0 me-3">
-                                                <img src="assets/images/user/man_avatar2.jpg" class="rounded-circle" alt="image">
-                                            </div>
-                                            <div>
-                                                <h5 class="mb-1">Hurleigh Smallcomb</h5>
-                                                <div class="d-flex gap-2 mb-3">
-                                                    <i class="bi bi-star-fill text-warning"></i>
-                                                    <i class="bi bi-star-fill text-warning"></i>
-                                                    <i class="bi bi-star-fill text-warning"></i>
-                                                    <i class="bi bi-star-fill text-warning"></i>
-                                                    <i class="bi bi-star-fill text-warning"></i>
-                                                </div>
-                                                <div>I love your products. It is very easy and fun to use this panel. I would
-                                                    recommend it
-                                                    to
-                                                    everyone.
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
