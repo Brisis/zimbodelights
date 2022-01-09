@@ -93,9 +93,9 @@ class AdminProductController extends Controller
   {
     if ($product->is_draft && $product->stock >= 1 && count($product->images) >= 1) {
       $product->is_draft = false;
-      if ($product->category->name == 'Biscuits' || $product->category->name == 'Snacks') {
-        $product->is_foodies = true;
-      }
+      // if ($product->category->name == 'Biscuits' || $product->category->name == 'Snacks') {
+      //   $product->is_foodies = true;
+      // }
       $product->save();
 
       $request->session()->flash('message', 'Product Successfully Published.');
