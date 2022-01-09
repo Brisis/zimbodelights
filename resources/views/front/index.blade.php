@@ -292,7 +292,7 @@
   <section class="pt-0 product-slider-section overflow-hidden" id="app-three">
     <div class="title-section px-15 mt-3">
       <h2>The Foodies Corner</h2>
-      <h3>Get all your favourite snacks in one corner </h3>
+      <h3>Get all your favourite food in one pack. </h3>
     </div>
     <div class="tab-content px-15">
       <div class="row gy-3 gx-3">
