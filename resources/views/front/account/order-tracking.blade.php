@@ -41,7 +41,7 @@
 
   <!-- order tracking start -->
   <div class="order-track px-15">
-    <div class="order-track-step in-process">
+    <div class="order-track-step">
       <div class="order-track-status">
         <span class="order-track-status-dot">
           <img src="assets/svg/check.svg" class="img-fluid" alt="">
@@ -53,7 +53,7 @@
         <span class="order-track-text-sub">order received, being processed</span>
       </div>
     </div>
-    <div class="order-track-step">
+    @if($order->status == 'shipped' || $order->status == 'delivered') <div class="order-track-step"> @else <div class="order-track-step in-process"> @endif
       <div class="order-track-status">
         <span class="order-track-status-dot">
           <img src="assets/svg/check.svg" class="img-fluid" alt="">
@@ -65,7 +65,7 @@
         <span class="order-track-text-sub">order on the way</span>
       </div>
     </div>
-    <div class="order-track-step">
+    @if($order->status == 'delivered') <div class="order-track-step"> @else <div class="order-track-step in-process"> @endif
       <div class="order-track-status">
         <span class="order-track-status-dot">
           <img src="assets/svg/check.svg" class="img-fluid" alt="">
@@ -105,7 +105,7 @@
       <div class="total-amount">
         <h4>Total Amount <span>$@convert($order->total)</span></h4>
       </div>
-      <a href="#" class="btn btn-outline content-color w-100 mt-4">Download Invoice</a>
+      <a href="javascript:window.print()" class="btn btn-outline content-color w-100 mt-4">Download Invoice</a>
     </div>
   </div>
   <!-- order details section end -->
