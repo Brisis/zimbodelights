@@ -31,16 +31,12 @@ class FrontDashboardController extends Controller
       $foodies = Product::where([['is_draft', false], ['is_foodies', true]])->latest()->paginate(9);
 
       $footer_categories = session()->get('footer_categories');
-      if(!$footer_categories) {
-          $footer_categories = $categories;
-          session()->put('footer_categories', $footer_categories);
-      }
+      $footer_categories = $categories;
+      session()->put('footer_categories', $footer_categories);
 
       $footer_socials = session()->get('footer_socials');
-      if(!$footer_socials) {
-          $footer_socials = $socials;
-          session()->put('footer_socials', $footer_socials);
-      }
+      $footer_socials = $socials;
+      session()->put('footer_socials', $footer_socials);
 
       return view('front.index', [
         'categories' => $categories,
