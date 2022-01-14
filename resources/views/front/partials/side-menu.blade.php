@@ -36,15 +36,15 @@
           </div>
         </a>
       </li>
-      <li>
-        <a href="{{ route('categories.categories') }}">
+      <!-- <li>
+        <a href="">
           <i class="iconly-Category icli"></i>
           <div class="content">
             <h4>Categories</h4>
             <h6>Traditional, Cereals..</h6>
           </div>
         </a>
-      </li>
+      </li> -->
       <li>
         <a href="{{ route('cart') }}">
           <i class="iconly-Buy icli"></i>

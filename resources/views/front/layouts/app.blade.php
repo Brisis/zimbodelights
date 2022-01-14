@@ -5,8 +5,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ZimboDelights">
-  <meta name="keywords" content="ZimboDelights">
+  <meta name="description" content="ZimboDelights is a premier food destination for the zimbos in diaspora.">
+  <meta name="keywords" content="ZimboDelights is a premier food destination for the zimbos in diaspora.">
   <meta name="author" content="ZimboDelights">
   <link rel="icon" href="{{ asset('static/svg/app.svg') }}" type="image/x-icon" />
   <title>Grocery from Home - ZimboDelights</title>
@@ -38,6 +38,14 @@
 </head>
 
 <body>
+  @if(request()->routeIs('home'))
+  <!-- loader strat -->
+  <div class="loader">
+      <span></span>
+      <span></span>
+  </div>
+  <!-- loader end -->
+  @endif
     @yield('content')
 
     <!-- latest jquery-->

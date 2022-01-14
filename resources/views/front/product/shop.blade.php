@@ -16,7 +16,7 @@
     <div class="header-option">
       <ul>
         <li>
-          <a href="{{ route('home') }}"><i class="iconly-Home icli"></i></a>
+          <a href="{{ route('cart') }}"><i class="iconly-Buy icli"></i></a>
         </li>
       </ul>
     </div>

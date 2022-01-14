@@ -6,7 +6,7 @@
     <!-- header start -->
     <header>
         <div class="back-links">
-            <a href="index.html">
+            <a href="{{ route('home') }}">
                 <i class="iconly-Arrow-Left icli"></i>
                 <div class="content">
                     <h2>about us</h2>
@@ -23,14 +23,22 @@
         <div class="help-img">
             <img src="{{ asset('static/images/logo.png') }}" class="img-fluid rounded-1 mb-3 w-100" alt="">
         </div>
-        <h4 class="mb-2">ZimboDelights is a premier food destination for the zimbos in diaspora.</h4>
-        <p class="content-color">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those
-            interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also repr oduced
-            in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
-        <p class="content-color">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a
-            piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin
-            professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, </p>
-        <div class="about-stats">
+        <p class="content-color">Zimbabwe’s food products are world famous for their great tasting, no nonsense, honest to
+          goodness flavours. From our chillies used in world famous flame grilled chicken peri peri
+          sauces, to our coffees bought by international beverages chains and sold around the world,
+          there is a mystical quality that brings this deep flavour, “ka-that”, to anything made in
+          Zimbabwe.
+        </p>
+        <p class="content-color">The products sold here on ZimboDelight’s online pantry bring you the best of Zimbabwe,
+          sourced straight from home, manufactured using familiar home grown ingredients and
+          recipes and formulations we have all known from childhood.
+        </p>
+        <p class="content-color">ZimboDelights exists to share the rich tasting legacy of all the greatest products from
+          Zimbabwe. Visit our online store for a fully stocked pantry of tasty delights that will remind
+          you of the simple delights of a life only a Zimbo will know. Welcome to ZimboDelights, your
+          honest to goodness, best of Zimbabwe pantry.
+        </p>
+        <!-- <div class="about-stats">
             <div class="row g-3 mb-4">
                 <div class="col-md-4 col-6">
                     <div class="stats-box">
@@ -60,10 +68,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <p class="content-color">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a
-            piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin
-            professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, </p>
+        </div> -->
+
         <h4 class="fw-bold mb-3">Talk to Us</h4>
         <p class="content-color">Sent us a message and get a quick reply through our <a href="{{ route('contact') }}">contact</a> page.</p>
     </section>

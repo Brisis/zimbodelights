@@ -8,6 +8,7 @@ use App\Models\Banner;
 use App\Models\Deals;
 use App\Models\Social;
 use App\Models\Contact;
+use App\Models\Newsletter;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
@@ -32,6 +33,15 @@ class SettingsController extends Controller
         'social' => $social,
         'deal' => $deal,
         'banners' => $banners
+      ]);
+    }
+
+    public function newsletter()
+    {
+      $newsletters = Newsletter::paginate(5);
+
+      return view('admin.settings.newsletter', [
+        'newsletters' => $newsletters
       ]);
     }
 

@@ -45,6 +45,143 @@
 /* 4.18 Settings Page CSS */
 /* 4.19 Shop Page CSS */
 /* 5.1 RTL CSS */
+@media screen and (min-width: 768px) {
+  header{
+    max-width: 60% !important;
+  }
+body{
+  max-width: 60% !important;
+  margin: auto !important;
+}
+}
+
+.right {float: right !important;}
+/* Image zoom on hover + Overlay colour */
+.parent {
+width: 100%;
+margin-bottom: 20px;
+border-radius: 10px;
+height: 300px;
+/* border: 1px solid #c72b2c; */
+overflow: hidden;
+position: relative;
+float: left;
+display: inline-block;
+cursor: pointer;
+}
+
+.child {
+height: 100%;
+width: 100%;
+background-size: cover;
+background-repeat: no-repeat;
+-webkit-transition: all .5s;
+-moz-transition: all .5s;
+-o-transition: all .5s;
+transition: all .5s;
+position: relative;
+}
+
+.child a {
+display: none;
+font-size: 35px;
+color: #ffffff !important;
+text-align: center;
+margin: auto;
+position: absolute;
+top: 5;
+left: 0;
+bottom: 0;
+right: 0;
+height: 50px;
+cursor: pointer;
+/*text-decoration: none;*/
+}
+
+.parent:hover .child, .parent:focus .child {
+-ms-transform: scale(1.2);
+-moz-transform: scale(1.2);
+-webkit-transform: scale(1.2);
+-o-transform: scale(1.2);
+transform: scale(1.2);
+}
+
+.parent:hover .child:before, .parent:focus .child:before {
+display: block;
+}
+
+.child:hover a, .child:focus a {
+display: block;
+}
+
+.child:before {
+content: "";
+display: none;
+height: 100%;
+width: 100%;
+position: absolute;
+top: 0;
+left: 0;
+}
+
+/* Media Queries */
+@media screen and (max-width: 960px) {
+.parent {width: 100%; margin: 20px 0px}
+}
+
+.category-title {
+  height:50px;
+  width: 100%;
+  padding: 10px;
+  background-color: #373435;
+}
+
+.footer-green {
+  padding:20px;
+  color:#f0f9ff;
+  background-color:#489834;
+}
+
+.footer-dark {
+  padding:20px;
+  color:#f0f9ff;
+  background-color:#111;
+}
+
+.footer-dark h3 {
+  margin-top:0;
+  margin-bottom:12px;
+  font-weight:bold;
+  font-size:16px;
+  color:#f0f9ff;
+}
+
+.footer-dark ul li {
+  display: block;
+  padding-top: 10px;
+}
+
+.footer-dark ul li a {
+  color:inherit;
+  text-decoration:none;
+  font-weight: lighter;
+  opacity:0.8;
+  color:#f0f9ff;
+}
+
+.footer-dark ul a:hover {
+  opacity:0.8;
+}
+
+.footer-dark .copyright {
+  text-align:center;
+  padding-top:24px;
+  opacity:1.0;
+  font-size:13px;
+  color: #fff;
+  margin-bottom:0;
+}
+
 @font-face {font-family: "Avenir"; src: url("Avenir-Black.woff")}
 
 

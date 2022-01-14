@@ -5,10 +5,10 @@
     <!-- header start -->
     <header>
         <div class="back-links">
-            <a href="{{ route('categories.categories') }}">
+            <a href="{{ route('home') }}">
                 <i class="iconly-Arrow-Left icli"></i>
                 <div class="content">
-                    <h2>Categories <span><i class="iconly-Arrow-Right-2 icli"></i>{{ $category->name }}</span></h2>
+                    <h2>Continue Shopping <span><i class="iconly-Arrow-Right-2 icli"></i>{{ $category->name }}</span></h2>
                 </div>
             </a>
         </div>

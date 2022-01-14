@@ -12,9 +12,6 @@
     </a>
     <div class="header-option">
       <ul>
-        <li>
-          <a href="{{ route('search') }}"><i class="iconly-Search icli"></i></a>
-        </li>
         @if($socials)
         <li>
           <a target="_blank" href="{{ $socials->facebook }}"><img src="{{ asset('static/images/icons/fb.svg') }}" width="22px" class="img-fluid" alt=""></a>
@@ -26,43 +23,37 @@
           <a target="_blank" href="{{ $socials->twitter }}"><img src="{{ asset('static/images/icons/tw.svg') }}" width="22px" class="img-fluid" alt=""></a>
         </li>
         @endif
+        <li>
+          .
+        </li>
+        <li>
+          <a href="{{ route('cart') }}"><i class="iconly-Buy icli"></i></a>
+        </li>
+        <li>
+          <a href="{{ route('search') }}"><i class="iconly-Search icli"></i></a>
+        </li>
       </ul>
     </div>
   </header>
 
 
   @include('front.partials.side-menu')
-
-  <!-- category start -->
-  <section class="category-section top-space">
-    <ul class="category-slide">
-      @foreach($categories as $category)
-      <li>
-        <a href="{{ route('categories.category', $category->slug) }}" class="category-box">
-          <img src="{{ asset($category->picture) }}" class="img-fluid" alt="">
-          <h4 style="width: 80px; font-size: 8pt; overflow: hidden;">{{ $category->name }}</h4>
-        </a>
-      </li>
-      @endforeach
-    </ul>
-  </section>
   <div class="divider t-12 b-20"></div>
-  <!-- category end -->
 
 
   <!-- home slider start -->
-  <section class="pt-0 home-section ratio_55">
+  <section class="t-10 home-section ratio_55">
     <div class="home-slider slick-default theme-dots">
       @foreach($banners as $banner)
       <div>
         <div class="slider-box">
           <img src="{{ asset($banner->image) }}" class="img-fluid bg-img" alt="">
-          <div class="slider-content">
-            <div>
+          <div class="slider-content" style="left:40%;">
+            <div class="text-center">
               @if($banner->title)<h2 class="text-white">{{ $banner->title }}</h2>@endif
               @if($banner->subtitle)<h1 style="color:#FFD700">{{ $banner->subtitle }}</h1>@endif
             <!--  <h6 class="text-white">Quick order Delivery</h6>-->
-              <a href="{{ $banner->url_link }}" class="btn btn-solid">GET MORE</a>
+              <a href="{{ $banner->url_link }}" class="btn btn-solid">BUY NOW</a>
             </div>
           </div>
         </div>
@@ -71,6 +62,81 @@
     </div>
   </section>
   <!-- home slider end -->
+  <div class="divider t-12" style="background-color: #f9b041 !important;"></div>
+
+  <!-- category start -->
+  <section class="category-section">
+    <div class="title-section px-15 mt-3">
+      <h2 class="text-uppercase">Top Category</h2>
+    </div>
+    <div class="row px-15">
+
+      @foreach($categories as $category)
+      <div class="col-md-6 col-6 mb-3">
+        <!-- <div class="parent">
+          <div class="product-content child" style="background-image: url({{ asset($category->picture) }});background-position: center; background-size: cover;background-repeat: no-repeat;">
+            <a href="{{ route('categories.category', $category->slug) }}">
+              <div class="category-title p-1">
+                  <h1 class="text-white">{{ $category->name }}</h1>
+              </div>
+            </a>
+          </div>
+        </div> -->
+        <div class="product-box ratio_square">
+          <div class="img-part">
+            <a href="{{ route('categories.category', $category->slug) }}">
+              <img src="{{ asset($category->picture) }}" alt="" class="img-fluid bg-img">
+            </a>
+          </div>
+          <div class="product-content">
+            <a href="{{ route('categories.category', $category->slug) }}">
+              <h3 class="text-center text-uppercase">{{ $category->name }}</h3>
+            </a>
+          </div>
+        </div>
+      </div>
+      @endforeach
+
+    </div>
+  </section>
+  <!-- category end -->
+  <!-- <div class="divider t-12 b-5" style="background-color: #ee4035 !important;"></div> -->
+
+    <section class="mb-5">
+      <div class="row">
+        <div class="col-md-4 col-12">
+          <div style="width: 100%; display: inline-block;background-color:#489834;text-align:center;padding: 10px;border-radius: 5px;">
+              <div class="brand-box">
+                <img src="{{ asset('static/images/icons/delivery.png') }}" style="filter:invert(100%)" width="50" class="img-fluid" alt="">
+                <h3 class="text-white text-uppercase">Fast Shipping</h3>
+                <!-- Free delivery on all orders above $399 -->
+              </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <div style="width: 100%; display: inline-block;background-color:red;text-align:center;padding: 10px;border-radius: 5px;">
+              <div class="brand-box">
+                <img src="{{ asset('static/images/icons/payment.png') }}" style="filter:invert(100%)" width="50" class="img-fluid" alt="">
+                <h3 class="text-white text-uppercase">Secure Payment</h3>
+              <!-- Fast and secure payment guaranteed -->
+              </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <div style="width: 100%; display: inline-block;background-color:#f9b041;text-align:center;padding: 10px;border-radius: 5px;">
+              <div class="brand-box">
+                <img src="{{ asset('static/images/icons/rocket.png') }}" style="filter:invert(100%)" width="50" class="img-fluid" alt="">
+                <h3 class="text-white text-uppercase">next day delivery</h3>
+                <!-- Limited to Greater Toronto Area -->
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- <div class="divider t-12 b-20" style="background-color: #ee4035 !important;"></div> -->
 
   <!-- deals section start -->
   <section class="deals-section px-15 pt-0" id="app-one">
@@ -115,7 +181,7 @@
       </div>
     </div>
   </section>
-  <div class="divider"></div>
+  <div class="divider" style="background-color: #489834 !important;"></div>
   <!-- deals section end -->
 
   @if($deal)
@@ -154,7 +220,7 @@
   </section>
   <!-- timer banner end -->
   @endif
-  <div class="divider"></div>
+<div class="divider" style="background-color: #373435 !important;"></div>
   <!-- deals section end -->
 
   <!-- tab section start -->
@@ -283,9 +349,7 @@
   </section>
   <!-- tab section end -->
 
-
-
-  <div class="divider"></div>
+  <div class="divider" style="background-color: #c72b2c !important;"></div>
   <!-- brands section end -->
 
   <!-- kids corner section start -->

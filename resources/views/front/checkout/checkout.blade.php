@@ -52,6 +52,11 @@
                                 <label for="c-name">Delivery Address</label>
                                 <input type="text" class="form-control" placeholder="place of residence" name="buyer_address">
                             </div>
+
+                            @else
+                              <div class="text-center">
+                                <img src="{{ asset('static/images/orders.png') }}" width="350" class="img-fluid" alt="">
+                              </div>
                             @endif
                         </form>
                     </div>
@@ -72,7 +77,7 @@
                 <h4>Total: $@convert($total)</h4>
                 <a href="{{ route('cart') }}#order-details" class="theme-color">View details</a>
             </div>
-            <a href="#" onclick="event.preventDefault(); document.getElementById('pay-form').submit();" class="btn btn-solid">Add Order</a>
+            <a href="#" onclick="event.preventDefault(); document.getElementById('pay-form').submit();" class="btn btn-solid">Place Order</a>
         </div>
     </div>
     <!-- bottom panel end -->

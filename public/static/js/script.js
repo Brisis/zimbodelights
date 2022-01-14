@@ -130,7 +130,7 @@ $('.home-slider').slick({
   centerMode: true,
   centerPadding: '30px',
   dots: true,
-  arrows: false,
+  arrows: true,
 });
 
 $('.brand-slider').slick({

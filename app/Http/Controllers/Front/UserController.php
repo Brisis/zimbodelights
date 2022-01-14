@@ -37,6 +37,15 @@ class UserController extends Controller
     ]);
   }
 
+  public function invoice(Order $order)
+  {
+
+    return view('front.account.invoice', [
+      'order' => $order,
+      'products' => $order->items
+    ]);
+  }
+
   public function settings()
   {
        return view('front.account.profile-setting');

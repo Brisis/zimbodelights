@@ -16,7 +16,6 @@
   </header>
   <!-- header end -->
 
-
   <!-- product detail start -->
   <div class="map-product-section px-15">
     <div class="product-inline">
@@ -109,6 +108,5 @@
     </div>
   </div>
   <!-- order details section end -->
-
 
   @endsection

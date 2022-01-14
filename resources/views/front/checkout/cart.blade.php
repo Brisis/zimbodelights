@@ -27,6 +27,7 @@
     </header>
     <!-- header end -->
 
+    @if(session('cart'))
 
     <!-- cart items start -->
     <section class="cart-section pt-0 top-space xl-space">
@@ -98,9 +99,9 @@
             <div class="col-4">
                 <div class="service-wrap">
                     <div class="icon-box">
-                        <img src="{{ asset('static/svg/returning.svg') }}" class="img-fluid" alt="">
+                        <img src="{{ asset('static/svg/delivery.svg') }}" class="img-fluid" alt="">
                     </div>
-                    <span>7 Day Return</span>
+                    <span>Fast Delivery</span>
                 </div>
             </div>
             <div class="col-4">
@@ -137,13 +138,26 @@
                 <a href="#order-details" class="theme-color">View details</a>
             </div>
             @if(session('cart'))
-              <a href="{{ route('checkout') }}" class="btn btn-solid">Place Order</a>
+              <a href="{{ route('checkout') }}" class="btn btn-solid">Checkout</a>
             @else
-              <a href="{{ route('categories.categories') }}" class="btn btn-solid">Continue Shopping</a>
+              <a href="{{ route('home') }}" class="btn btn-solid">Continue Shopping</a>
             @endif
         </div>
     </div>
     <!-- bottom panel end -->
 
+    @else
+    <!-- empty cart start -->
+    <section class="px-15">
+        <div class="empty-cart-section text-center">
+            <img src="{{ asset('static/images/empty-cart.png') }}" class="img-fluid" alt="">
+            <h2>Whoops !! Cart is Empty</h2>
+            <p>Looks like you haven’t add any products yet.</p>
+            <a href="{{ route('home') }}" class="btn btn-solid w-100">start shopping</a>
+        </div>
+    </section>
+    <!-- empty cart end -->
+
+    @endif
 
 @endsection

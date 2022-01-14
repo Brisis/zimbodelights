@@ -44,6 +44,8 @@ Route::get('/search/', [ProductController::class, 'search'])->name('search');
 Route::get('/product/{product:slug}', [ProductController::class, 'product'])->name('product');
 Route::middleware('auth')->post('/add_review/{product}', [ProductController::class, 'addReview'])->name('add_review');
 
+Route::post('/subscribed', [FrontDashboardController::class, 'subscribe'])->name('subscribe');
+
 //Category Routes
 Route::group([
   'prefix' => 'categories',
@@ -51,7 +53,7 @@ Route::group([
 ],
 function()
 {
-  Route::get('/', [CategoryController::class, 'categories'])->name('categories');
+  // Route::get('/', [CategoryController::class, 'categories'])->name('categories');
 
   Route::get('/{category:slug}', [CategoryController::class, 'category'])->name('category');
 }
@@ -87,6 +89,8 @@ function()
   Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
   Route::get('/orders', [UserController::class, 'orders'])->name('orders');
   Route::get('/order/{order}', [UserController::class, 'order'])->name('order');
+
+  Route::get('/invoice/{order}', [UserController::class, 'invoice'])->name('invoice');
 
   Route::get('/settings', [UserController::class, 'settings'])->name('settings');
 
@@ -163,6 +167,9 @@ function(){
     'prefix' => 'settings'
     ], function () {
       Route::get('/', [SettingsController::class,'index'])->name("settings");
+
+      Route::get('/newsletter', [SettingsController::class,'newsletter'])->name("newsletter");
+
       //Add
       Route::get('/add_contact', [SettingsController::class,'contact'])->name("add_contact");
       Route::post('/add_contact', [SettingsController::class,'addContact']);

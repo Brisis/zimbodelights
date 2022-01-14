@@ -38,6 +38,11 @@
                           </a>
                       </li>
                       <li class="nav-item" role="presentation">
+                          <a class="nav-link" href="{{ route('admin.settings.newsletter') }}">
+                              <i class="bi bi-envelope me-2"></i> Newsletter
+                          </a>
+                      </li>
+                      <li class="nav-item" role="presentation">
                           <a class="nav-link" href="{{ route('admin.settings.settings') }}">
                               <i class="bi bi-lock me-2"></i> Credentials
                           </a>

@@ -25,6 +25,8 @@ class ProductController extends Controller
 
     $avgRating = $product->reviews->avg('rating');
 
+    //dd($product->reviews);
+
     return view('front.product.product', [
       'product' => $product,
       'images' => $product->images,
@@ -65,7 +67,7 @@ class ProductController extends Controller
       'description' => 'required'
     ]);
 
-    auth()->user()->reviews()->create([
+    $review = $request->user()->reviews()->create([
       'product_id' => $product->id,
       'rating' => $request->rating,
       'description' => $request->description
