@@ -23,9 +23,7 @@
           <a target="_blank" href="{{ $socials->twitter }}"><img src="{{ asset('static/images/icons/tw.svg') }}" width="22px" class="img-fluid" alt=""></a>
         </li>
         @endif
-        <li>
-          .
-        </li>
+        <li class="px-2"></li>
         <li>
           <a href="{{ route('cart') }}"><i class="iconly-Buy icli"></i></a>
         </li>

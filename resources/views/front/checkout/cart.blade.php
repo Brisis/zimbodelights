@@ -9,7 +9,7 @@
                 <i class="iconly-Arrow-Left icli"></i>
                 <div class="content">
                     <h2>Shopping Cart</h2>
-                    <h6>Step 2 of 4</h6>
+                    <h6>Step 1 of 2</h6>
                 </div>
             </a>
         </div>

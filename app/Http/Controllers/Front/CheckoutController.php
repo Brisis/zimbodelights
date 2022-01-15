@@ -22,6 +22,14 @@ class CheckoutController extends Controller
   {
     $temp_user = session()->get('temp_user');
 
+    $user = auth()->user();
+    if ($user) {
+      if (!$user->address) {
+        $request->session()->flash('add_address', "");
+        return redirect()->route('buyer.settings');//back();
+      }
+    }
+
     $cart = session()->get('cart');
     $subtotal = 0;
     $delivery = 10;
@@ -48,24 +56,6 @@ class CheckoutController extends Controller
     $admin = User::where('is_admin', true)->first();
     $temp_user = session()->get('temp_user');
 
-    if ($user) {
-      if (!$user->address) {
-        $request->session()->flash('add_address', "");
-        return redirect()->back();
-      }
-    }
-    elseif (!$user) {
-      if (!$temp_user) {
-        $temp_user = [
-          "name" => $request->buyer_name,
-          "email" => $request->buyer_email,
-          "address" => $request->buyer_address
-        ];
-
-        session()->put('temp_user', $temp_user);
-      }
-    }
-
     $cart = session()->get('cart');
     $subtotal = 0;
     $delivery = 10;
@@ -76,9 +66,9 @@ class CheckoutController extends Controller
 
     $total = $subtotal + $delivery;
 
-    $buyer_name = $user ? $user->name : $temp_user["name"];
-    $buyer_email = $user ? $user->email : $temp_user["email"];
-    $buyer_address = $user ? $user->address : $temp_user["address"];
+    $buyer_name = $user ? $user->name : $request->buyer_name;
+    $buyer_email = $user ? $user->email : $request->buyer_email;
+    $buyer_address = $user ? $user->address : $request->buyer_address;
 
     $order = Order::create([
       'user_id' => $user ? $user->id : $admin->id,
@@ -112,48 +102,44 @@ class CheckoutController extends Controller
 
     $request->session()->forget('cart');
 
-    return redirect()->route('pay', $order);
-  }
+    $curr_order = session()->get('curr_order');
+    $curr_order = $order;
+    session()->put('curr_order', $curr_order);
 
-  public function pay(Order $order)
-  {
-
-    \Stripe\Stripe::setApiKey('sk_test_1bOuDMsPbava9TsLWgqd3V4e00m7Txp5wT');
-
-    $session = \Stripe\Checkout\Session::create([
-      'payment_method_types' => ['card'],
-      'line_items' => [[
-        'price_data' => [
-          'currency' => 'usd',
-          'product_data' => [
-            'name' => 'ZimboDelights Order',
-          ],
-          'unit_amount' => $order->total * 100,
-        ],
-        'quantity' => 1,
-      ]],
-      'mode' => 'payment',
-      'success_url' => route('checkout_done', $order),
-      'cancel_url' => route('checkout'),
-    ]);
-
-    return view('front.checkout.pay', [
-      'session' => $session
-    ]);
-  }
-
-  public function checkoutDone(Order $order)
-  {
     $order->is_paid = true;
     $order->save();
 
+    if (!$user && !$temp_user) {
+      $temp_user = [
+        "name" => $request->buyer_name,
+        "email" => $request->buyer_email,
+        "address" => $request->buyer_address
+      ];
+
+      session()->put('temp_user', $temp_user);
+    }
+
+    return redirect()->route('checkout_done');
+  }
+
+  public function resetDetails(Request $request)
+  {
+    $request->session()->forget('temp_user');
+
+    return redirect()->back();
+  }
+
+  public function checkoutDone(Request $request)
+  {
     $user = auth()->user();
     $admin = User::where('is_admin', true)->first();
     $temp_user = session()->get('temp_user');
 
-    Mail::to($user ? $user->email : $temp_user['email'])->send(new OrderMail());
+    $order = session()->get('curr_order');
 
-    Mail::to($admin->email)->send(new OrderMailAdmin($order));
+    // Mail::to($user ? $user->email : $temp_user['email'])->send(new OrderMail());
+    //
+    // Mail::to($admin->email)->send(new OrderMailAdmin($order));
 
     return view('front.checkout.checkout-done', [
       'order' => $order,

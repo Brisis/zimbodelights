@@ -35,6 +35,7 @@
 
   <!-- Theme css -->
   <link rel="stylesheet" href="{{ asset('static/css/style.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -69,9 +70,23 @@
     <!-- script js -->
     <script src="{{ asset('static/js/script.js') }}"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- <script>
+    if ('serviceWorker' in navigator) {
+      // Register a service worker hosted at the root of the
+      // site using the default scope.
+      navigator.serviceWorker.register("{{asset('sw.js')}}").then(function(registration) {
+        console.log('Service worker registration succeeded:', registration);
+      }, /*catch*/ function(error) {
+        console.log('Service worker registration failed:', error);
+      });
+      } else {
+      console.log('Service workers are not supported.');
+      }
+    </script> -->
 
         <script type="text/javascript">
 
