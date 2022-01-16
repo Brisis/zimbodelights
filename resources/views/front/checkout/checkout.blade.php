@@ -118,7 +118,8 @@
                                      "buyer_address": buyer_address
                                    },
                                    success: function (response) {
-                                       window.location.href = "/checkout_done";
+                                     window.location.replace("/checkout_done");
+                                       //window.location.href = "/checkout_done";
                                    }
                                 });
 
@@ -129,9 +130,6 @@
 
                         const form = document.getElementById('pay-form');
                         form.addEventListener('submit', logSubmit);
-
-
-
                       </script>
                     </div>
                 </div>
