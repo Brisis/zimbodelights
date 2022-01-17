@@ -135,8 +135,9 @@ class CheckoutController extends Controller
     $admin = User::where('is_admin', true)->first();
     $temp_user = session()->get('temp_user');
 
-    $order = session()->get('curr_order');
-
+    $curr_order = session()->get('curr_order');
+    $order = Order::find($curr_order->id);
+    $request->session()->forget('curr_order');
     // Mail::to($user ? $user->email : $temp_user['email'])->send(new OrderMail());
     //
     // Mail::to($admin->email)->send(new OrderMailAdmin($order));

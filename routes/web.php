@@ -19,6 +19,9 @@ use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\SettingsController;
 
+use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\StripeController;
+
 //Front End Routes
 
 //Authentication
@@ -70,13 +73,21 @@ Route::post('remove-all-from-cart', [CartController::class, 'removeAll'])->name(
 
 //Checkout Routes
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
-Route::post('/create_order', [CheckoutController::class, 'createOrder'])->name('create_order');
+//Route::post('/create_order', [CheckoutController::class, 'createOrder'])->name('create_order');
+// Route::get('/pay', [CheckoutController::class, 'pay'])->name('pay');
+Route::post('/reset_temp', [CheckoutController::class, 'resetDetails'])->name('reset_temp');
 
-Route::get('/{order}/pay', [CheckoutController::class, 'pay'])->name('pay');
-// Route::post('/pay', [CheckoutController::class, 'pay']);
+Route::get('/checkout_done', [CheckoutController::class, 'checkoutDone'])->name('checkout_done');
 
-Route::get('/{order}/checkout_done', [CheckoutController::class, 'checkoutDone'])->name('checkout_done');
+Route::post('/create_order', [PayPalController::class, 'createOrder'])->name('create_order');
 
+//PayPal Checkout
+Route::get('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
+Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
+
+//Stripe Checkout
+Route::post('/stripe_checkout', [StripeController::class, 'pay'])->name('stripe_checkout');
 
 //Permanent Buyer Routes
 Route::group([

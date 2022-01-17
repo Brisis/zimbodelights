@@ -12,7 +12,7 @@
                 </div>
             </a>
         </div>
-        <div class="header-option">
+        <!-- <div class="header-option">
             <ul>
                 <li>
                     <a href=""><img src="{{ asset('static/svg/share-2.svg') }}" class="img-fluid" alt=""></a>
@@ -21,7 +21,7 @@
                   <a href="{{ route('cart') }}"><i class="iconly-Buy icli"></i></a>
                 </li>
             </ul>
-        </div>
+        </div> -->
     </header>
     <!-- header end -->
     <style media="screen">
