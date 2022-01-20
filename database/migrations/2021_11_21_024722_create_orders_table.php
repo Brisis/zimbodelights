@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->text('buyer_address');
             $table->string('status')->default('pending');
             $table->boolean('is_paid')->default(false);
+            $table->string('payment_method');
             $table->text('date_delivered')->nullable();
             $table->timestamps();
         });

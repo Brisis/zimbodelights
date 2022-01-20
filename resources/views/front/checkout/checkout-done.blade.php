@@ -18,7 +18,7 @@
 
 
   <!-- order success section start -->
-  <section class="order-success-section px-15 top-space xl-space">
+  <section class="order-success-section px-15 ">
     <div>
       <img src="assets/images/check-circle.gif" class="img-fluid" alt="">
       <h1>Order successfully!</h1>
@@ -27,78 +27,202 @@
   </section>
   <!-- order success section end -->
 
+  <section class="my-15">
+    <style>
+      .outputInvoice {
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        text-align: center;
+        color: #777;
+      }
 
-  <!-- order details section start -->
-  <section class="px-15">
-    <h2 class="page-title">Order Details</h2>
-    <div class="details">
-      <ul>
-        <li class="mb-3 d-block">
-          <h4 class="fw-bold mb-1">Your order number is: #{{ $order->id }}</h4>
-          <h4 class="content-color">An email receipt including the details about your order has been sent to your email
-            ID.</h4>
-        </li>
-        <li class="mb-3 d-block">
-          <h4 class="fw-bold mb-1">This order will be shipped to:</h4>
-          <h4 class="content-color">{{ $order->buyer_address }},</h4>
-          <h4 class="content-color">{{ $order->buyer_name }}</h4>
-          <h4 class="content-color">{{ $order->buyer_email }}</h4>
-        </li>
-      </ul>
-    </div>
-  </section>
-  <div class="divider"></div>
-  <!-- order details section end -->
+      .outputInvoice h1 {
+        font-weight: 300;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+        color: #000;
+      }
 
+      .outputInvoice h3 {
+        font-weight: 300;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        font-style: italic;
+        color: #555;
+      }
 
+      .outputInvoice a {
+        color: #06f;
+      }
 
-  <!-- expected delivery section start -->
-  <section class="px-15 pt-0">
-    <h2 class="page-title">Order Summary</h2>
-    <div class="product-section">
-      <div class="row gy-3">
+      .invoice-box {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+      }
+
+      .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+        border-collapse: collapse;
+      }
+
+      .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+      }
+
+      .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+      }
+
+      .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+      }
+
+      .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+      }
+
+      .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+      }
+
+      .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+      }
+
+      .invoice-box table tr.details td {
+        padding-bottom: 20px;
+      }
+
+      .invoice-box table tr.item td {
+        border-bottom: 1px solid #eee;
+      }
+
+      .invoice-box table tr.item.last td {
+        border-bottom: none;
+      }
+
+      .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+          width: 100%;
+          display: block;
+          text-align: center;
+        }
+
+        .invoice-box table tr.information table td {
+          width: 100%;
+          display: block;
+          text-align: center;
+        }
+      }
+    </style>
+
+  <div class="my-4 outputInvoice" id="outputInvoice">
+    <div class="invoice-box">
+      <table>
+        <tr class="top">
+          <td colspan="2">
+            <table>
+              <tr>
+                <td class="title">
+                  <img src="{{ asset('static/images/logo.png') }}" alt="Company logo" style="width: 100%; max-width: 200px" />
+                </td>
+
+                <td>
+                  Invoice #: {{ $order->id }}<br />
+                  Created: {{ date('d-m-Y', strtotime($order->created_at)) }}<br />
+                  Paid: {{ date('d-m-Y', strtotime($order->created_at)) }}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr class="information">
+          <td colspan="2">
+            <table>
+              <tr>
+                <td>
+                  ZimboDelights, Inc.<br />
+                  12345 Sunny Road<br />
+                  London
+                </td>
+
+                <td>
+                  {{ $order->buyer_name }}<br />
+                  {{ $order->buyer_email }}<br />
+                  {{ $order->buyer_address }}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr class="heading">
+          <td>Payment Method</td>
+          <td></td>
+        </tr>
+
+        <tr class="details">
+          <td>{{ $order->payment_method }}</td>
+          <td></td>
+        </tr>
+
+        <tr class="heading">
+          <td>Item</td>
+
+          <td>Price</td>
+        </tr>
+
         @foreach($products as $product)
-        <div class="col-12">
-          <div class="product-inline">
-            <a href="{{ route('product', $product->product->slug) }}">
-              <img src="{{ asset($product->product->image) }}" class="img-fluid" alt="">
-            </a>
-            <div class="product-inline-content">
-              <div>
-                <a href="{{ route('product', $product->product->slug) }}">
-                  <h4>{{ $product->product->name }}</h4>
-                </a>
-                <h5 class="content-color">Qty: {{ $product->quantity }}</h5>
-                <div class="price">
-                  <h4>$@convert($product->price)</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <tr class="item">
+          <td>{{ $product->product->name }} x{{ $product->quantity }}</td>
+          <td>$@convert($product->price)</td>
+        </tr>
         @endforeach
-      </div>
+        <tr class="item last">
+          <td></td>
+          <td>Delivery: $10.0</td>
+        </tr>
+        <tr class="total">
+          <td></td>
+          <td>Total: $@convert($order->total)</td>
+        </tr>
+      </table>
     </div>
-  </section>
-  <!-- expected delivery section end -->
+  </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <!-- order details start -->
-  <section class="px-15">
-    <div class="order-details">
-      <ul>
-        <li>
-          <h4>Delivery fee <span>$10.00</span></h4>
-        </li>
-      </ul>
-      <div class="total-amount">
-        <h4>Total Amount <span>$@convert($order->total)</span></h4>
+    <div class="card mt-4">
+          <div class="text-center mt-4 mb-4">
+              <button onclick="printOrder()" class="btn btn-outline-primary">Download PDF</button>
+          </div>
+          <script>
+            function printOrder() {
+              var element = document.getElementById('outputInvoice');
+              html2pdf(element);
+            }
+          </script>
       </div>
-    </div>
   </section>
-  <!-- order details end -->
-
-
 
   <!-- panel space start -->
   <section class="panel-space"></section>

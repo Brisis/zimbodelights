@@ -1,5 +1,3 @@
-
-
 @if ($paginator->hasPages())
 <nav class="mt-4" aria-label="Page navigation example">
     <ul class="pagination justify-content-center">

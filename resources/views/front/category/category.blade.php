@@ -67,6 +67,11 @@
           </div>
         </div>
         @endforeach
+
+        <div class="col-md-12">
+          {{ $products->links('front.partials.pagination') }}
+        </div>
+
       </div>
     </section>
     <!-- products end -->

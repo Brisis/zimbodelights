@@ -20,7 +20,7 @@
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">
+                    <a href="{{ route('admin.dashboard') }}">
                         <i class="bi bi-globe2 small me-2"></i> Dashboard
                     </a>
                 </li>
@@ -29,7 +29,7 @@
         </nav>
     </div>
 
-    <div class="card">
+    <!-- <div class="card">
         <div class="card-body">
             <div class="d-md-flex gap-4 align-items-center">
                 <div class="d-none d-md-flex">All Categories</div>
@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="table-responsive">
         <table class="table table-custom table-lg mb-0" id="orders">

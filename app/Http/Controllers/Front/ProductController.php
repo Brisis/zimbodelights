@@ -43,7 +43,8 @@ class ProductController extends Controller
     $products = Product::query()
       ->where('name', 'LIKE', "%{$search}%")
       ->orWhere('description', 'LIKE', "%{$search}%")
-      ->paginate(10);
+      ->get();
+      // ->paginate(10);
 
     return view('front.product.search', [
       'products' => $products->where('is_draft', false),

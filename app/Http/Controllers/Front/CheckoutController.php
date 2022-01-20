@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Mail;
 class CheckoutController extends Controller
 {
 
-  public function checkout()
+  public function checkout(Request $request)
   {
     $temp_user = session()->get('temp_user');
 
@@ -43,6 +43,8 @@ class CheckoutController extends Controller
     }
 
     $total = $subtotal + $delivery;
+
+
 
     return view('front.checkout.checkout', [
       'total' => $total,
@@ -136,8 +138,8 @@ class CheckoutController extends Controller
     $temp_user = session()->get('temp_user');
 
     $curr_order = session()->get('curr_order');
-    $order = Order::find($curr_order->id);
-    $request->session()->forget('curr_order');
+    $order = Order::find($curr_order ? $curr_order->id : 5);
+    //$request->session()->forget('curr_order');
     // Mail::to($user ? $user->email : $temp_user['email'])->send(new OrderMail());
     //
     // Mail::to($admin->email)->send(new OrderMailAdmin($order));

@@ -22,9 +22,12 @@ class CategoryController extends Controller
 
   public function category(Category $category)
   {
+    $products = Product::where('category_id', $category->id)->where('is_draft', false)->paginate(2);
+    //$category->products->where('is_draft', false)->paginate(2);
+
     return view('front.category.category', [
       'category' => $category,
-      'products' => $category->products->where('is_draft', false)
+      'products' => $products
     ]);
   }
 }
