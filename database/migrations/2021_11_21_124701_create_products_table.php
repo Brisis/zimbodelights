@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->double('price');
             $table->double('price_cut')->nullable();
             $table->double('discount')->nullable();
+            $table->double('weight');
             $table->text('slug');
             $table->string('image')->nullable();
             $table->longText('description')->nullable();

@@ -147,7 +147,7 @@
 
                 <td>
                   Invoice #: {{ $order->id }}<br />
-                  Created: {{ date('d-m-Y', strtotime($order->created_at)) }} <br />
+                  Created: {{ date('d-m-Y', strtotime($order->created_at)) }}<br />
                   Date Delivered: @if($order->date_delivered) {{ date('d-m-Y', strtotime($order->date_delivered)) }} @endif
                 </td>
               </tr>

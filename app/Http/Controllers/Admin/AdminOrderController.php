@@ -12,6 +12,7 @@ use App\Models\OrderItem;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Carbon;
 
 class AdminOrderController extends Controller
 {
@@ -40,6 +41,9 @@ class AdminOrderController extends Controller
     ]);
 
     $order->status = $request->status;
+    if ($request->status == 'delivered') {
+      $order->date_delivered = Carbon::today();
+    }
     $order->save();
 
     return redirect()->back();

@@ -32,10 +32,11 @@
     <!-- cart items start -->
     <section class="cart-section pt-0 top-space xl-space">
       <div class="divider"></div>
-      <?php $total = 0 ?>
+      <?php $total = 0; $weight = 0; ?>
        @if(session('cart'))
            @foreach(session('cart') as $id => $details)
                <?php $total += $details['price'] * $details['quantity'] ?>
+               <?php $weight += $details['weight'] ?>
                <div class="cart-box px-15" data-id="{{ $id }}">
                    <a href="{{ route('product', $details['slug']) }}" class="cart-img">
                        <img src="{{ $details['image'] }}" class="img-fluid" alt="">
@@ -45,8 +46,8 @@
                            <h4>{{ $details['name'] }}</h4>
                        </a>
                        <div class="price">
-                         <h4>$@convert($details['price'])
-                           <span>(Total: $@convert($details['price'] * $details['quantity']))</span>
+                         <h4>£@convert($details['price'])
+                           <span>(Total: £@convert($details['price'] * $details['quantity']))</span>
                          </h4>
                        </div>
                        <div class="select-size-sec d-flex justify-content-between">
@@ -73,19 +74,32 @@
 
     <!-- order details start -->
     <section id="order-details" class="px-15 pt-0">
-      <?php $delivery = 10 ?>
         <h2 class="title">Order Details:</h2>
         <div class="order-details">
             <ul>
                 <li>
-                    <h4>Bag total <span>${{ $total }}</span></h4>
+                    <h4>Bag total <span>£{{ $total }}</span></h4>
                 </li>
+                <?php
+                  $nextday = 0;
+                  $standard = 0;
+
+                  if ($weight < 1000) {
+                    $nextday = 3.55;
+                    $standard = 3.67;
+                  }
+
+                  if ($weight > 1000) {
+                    $nextday = 5.00;
+                    $standard = 4.40;
+                  }
+                 ?>
                 <li>
-                    <h4>Delivery <span>${{ $delivery }}</span></h4>
+                    <h4>Delivery <span>Nextday: £@convert($nextday) | Standard: £@convert($standard)</span></h4>
                 </li>
             </ul>
             <div class="total-amount">
-                <h4>Total Amount <span>$@convert($delivery + $total)</span></h4>
+                <h4>Total Amount <span>Nextday: £@convert($nextday + $total) | Standard: £@convert($standard + $total)</span></h4>
             </div>
         </div>
     </section>
@@ -134,8 +148,8 @@
     <div class="cart-bottom">
         <div>
             <div class="left-content">
-                <h4>$@convert($delivery + $total)</h4>
-                <a href="#order-details" class="theme-color">View details</a>
+                <h4>Terms & Conditions</h4>
+                <a href="{{ route('terms') }}" class="theme-color">View details</a>
             </div>
             @if(session('cart'))
               <a href="{{ route('checkout') }}" class="btn btn-solid">Checkout</a>

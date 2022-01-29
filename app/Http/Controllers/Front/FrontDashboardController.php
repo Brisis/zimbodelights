@@ -12,6 +12,7 @@ use App\Models\Newsletter;
 use App\Models\Banner;
 use App\Models\Social;
 use App\Models\Deals;
+use Mail;
 
 class FrontDashboardController extends Controller
 {
@@ -70,6 +71,28 @@ class FrontDashboardController extends Controller
       return view('front.website.contact');
     }
 
+    public function contactPost(Request $request)
+    {
+        $this->validate($request, [
+                        'name' => 'required',
+                        'email' => 'required|email',
+                        'comment' => 'required'
+                ]);
+
+        Mail::send('emails.email', [
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'comment' => $request->get('comment') ],
+                function ($message) {
+                        $message->from('admin@zimbodelights.com');
+                        $message->to('admin@zimbodelights.com', 'ZimboDelights')
+                                ->subject('Customer Support');
+        });
+
+        return back()->with('success', 'Thanks for contacting us, We will get back to you soon!');
+
+    }
+
     public function terms()
     {
       return view('front.website.terms');
@@ -78,17 +101,36 @@ class FrontDashboardController extends Controller
     public function subscribe(Request $request)
     {
       $this->validate($request, [
-        'email' => 'required|max:255',
-      ]);
+                      'email' => 'required|email'
+              ]);
 
-      $newsletter = Newsletter::create([
-        'email' => $request->email,
-      ]);
-
-      // $admin = User::where('is_admin', true)->first();
-      //
-      // Mail::to($admin->email)->send(new NewsletterMail($newsletter));
+      Mail::send('emails.subscribed', [
+              'email' => $request->get('email')],
+              function ($message) {
+                      $message->from('admin@zimbodelights.com');
+                      $message->to('admin@zimbodelights.com', 'ZimboDelights')
+                              ->subject('Newsletter Subscription');
+      });
 
       return view('front.website.subscribed');
+    }
+
+    public function notify(Request $request, Product $product)
+    {
+      $this->validate($request, [
+                      'email' => 'required|email'
+              ]);
+
+      Mail::send('emails.notify', [
+              'email' => $request->get('email'),
+              'product' => $product->name ],
+              function ($message) {
+                      $message->from('admin@zimbodelights.com');
+                      $message->to('admin@zimbodelights.com', 'ZimboDelights')
+                              ->subject('ZimboDelights Stock Notifications');
+      });
+
+      return back()->with('success', 'Success. You will be notified once its available!');
+
     }
 }

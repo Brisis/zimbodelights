@@ -34,13 +34,39 @@ class PayPalController extends Controller
 
     $cart = session()->get('cart');
     $subtotal = 0;
-    $delivery = 10;
+    $weight = 0;
+
+    $delivery_fees = 0;
 
     foreach($cart as $product => $item) {
       $subtotal += $item['price'] * $item['quantity'];
+      $weight += $item['weight'] * $item['quantity'];
     }
 
-    $total = $subtotal + $delivery;
+    $del_method = $request->delivery_method;
+
+    if ($weight < 1000) {
+      if ($del_method == 'standard') {
+        $total = $subtotal + 3.67;
+        $delivery_fees = 3.67;
+      }
+      if ($del_method == 'nextday') {
+        $total = $subtotal + 3.55;
+        $delivery_fees = 3.55;
+      }
+    }
+
+    if ($weight > 1000) {
+      if ($del_method == 'standard') {
+        $total = $subtotal + 4.40;
+        $delivery_fees = 4.40;
+      }
+      if ($del_method == 'nextday') {
+        $total = $subtotal + 5.00;
+        $delivery_fees = 5.00;
+      }
+    }
+
 
     $buyer_name = $user ? $user->name : $request->buyer_name;
     $buyer_email = $user ? $user->email : $request->buyer_email;
@@ -51,6 +77,8 @@ class PayPalController extends Controller
       'buyer_name' => $buyer_name,
       'buyer_email' => $buyer_email,
       'buyer_address' => $buyer_address,
+      'delivery_method' => $request->delivery_method,
+      'delivery_fees' => $delivery_fees,
       'total' => $total
     ]);
 
@@ -101,7 +129,7 @@ class PayPalController extends Controller
             "purchase_units" => [
                 0 => [
                     "amount" => [
-                        "currency_code" => "USD",
+                        "currency_code" => "GBP",
                         "value" => $order->total
                     ]
                 ]
@@ -141,6 +169,7 @@ class PayPalController extends Controller
           $order = Order::find($curr_order->id);
 
           $order->is_paid = true;
+          $order->payment_method = 'PayPal';
           $order->save();
 
           $request->session()->forget('cart');

@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Order;
 
-class OrderMailAdmin extends Mailable
+class OrderMailAdmin extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -30,9 +30,12 @@ class OrderMailAdmin extends Mailable
      */
     public function build()
     {
-        return $this->subject('Order from ZimboDelights')->markdown('emails.order-admin', [
-          'order' => $this->order,
-          'url' => route('admin.orders.order', $this->order->id)
-        ]);
+
+          return $this->markdown('emails.order-admin', [
+            'order' => $this->order,
+            'url' => route('admin.orders.order', $this->order->id)
+          ])
+          ->from('admin@zimbodelights.com', 'ZimboDelights')
+          ->subject('Order from ZimboDelights');
     }
 }

@@ -13,7 +13,7 @@ use App\Mail\OrderMail;
 use App\Mail\OrderMailAdmin;
 use App\Notifications\InvoicePaid;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Mail;
+use Mail;
 
 class CheckoutController extends Controller
 {
@@ -77,6 +77,7 @@ class CheckoutController extends Controller
       'buyer_name' => $buyer_name,
       'buyer_email' => $buyer_email,
       'buyer_address' => $buyer_address,
+      'delivery_method' => $request->delivery_method,
       'total' => $total
     ]);
 
@@ -127,6 +128,7 @@ class CheckoutController extends Controller
   public function resetDetails(Request $request)
   {
     $request->session()->forget('temp_user');
+    $request->session()->forget('curr_order');
 
     return redirect()->back();
   }
@@ -138,15 +140,48 @@ class CheckoutController extends Controller
     $temp_user = session()->get('temp_user');
 
     $curr_order = session()->get('curr_order');
-    $order = Order::find($curr_order ? $curr_order->id : 5);
-    //$request->session()->forget('curr_order');
-    // Mail::to($user ? $user->email : $temp_user['email'])->send(new OrderMail());
-    //
-    // Mail::to($admin->email)->send(new OrderMailAdmin($order));
+    if (!$curr_order) {
+      return redirect()->route('home');
+    }
+
+    $order = Order::find($curr_order->id);
+    if (!$order) {
+      return redirect()->route('home');
+    }
+
+    $request->session()->forget('curr_order');
+
+    Mail::to($user ? $user->email : $temp_user['email'])->send(new OrderMail($order));
+
+    Mail::to("admin@zimbodelights.com")->send(new OrderMailAdmin($order));
 
     return view('front.checkout.checkout-done', [
       'order' => $order,
       'products' => $order->items
     ]);
   }
+
+  public function checkoutPrev(Request $request, Order $order)
+  {
+    $user = auth()->user();
+    $temp_user = session()->get('temp_user');
+
+    if (!$order) {
+      return redirect()->route('home');
+    }
+
+    $email = $user ? $user->email : $temp_user['email'];
+
+    if ($email) {
+      if ($order->buyer_email != $email) {
+        return redirect()->route('home');
+      }
+    }
+
+    return view('front.checkout.checkout-prev', [
+      'order' => $order,
+      'products' => $order->items
+    ]);
+  }
+
 }

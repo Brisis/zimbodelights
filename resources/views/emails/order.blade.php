@@ -1,10 +1,10 @@
 @component('mail::message')
 # Order successfully sent
 
-Dear customer, your order has been received. It will be delivered in 10 days
+Dear customer, your order has been received.
 
-@component('mail::button', ['url' => '/'])
-Continue Shopping
+@component('mail::button', ['url' => $url])
+Download Invoice
 @endcomponent
 
 Thanks,<br>

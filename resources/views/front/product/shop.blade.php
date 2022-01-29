@@ -44,9 +44,9 @@
               <h4>{{ $product->name }}</h4>
             </a>
             <div class="price">
-              <h4>$@convert($product->price)
+              <h4>£@convert($product->price)
                 @if($product->discount)
-                <del>$@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
+                <del>£@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
                 @endif
               </h4>
             </div>

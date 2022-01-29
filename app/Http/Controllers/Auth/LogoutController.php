@@ -9,10 +9,8 @@ class LogoutController extends Controller
 {
     public function store(Request $request)
     {
-      auth()->logout();
-
       $request->session()->forget('temp_user');
-
+      auth()->logout();
       return redirect()->route('home');
     }
 }

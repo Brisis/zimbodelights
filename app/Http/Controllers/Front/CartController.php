@@ -31,6 +31,7 @@ class CartController extends Controller
                       "name" => $product->name,
                       "quantity" => 1,
                       "price" => $product->price,
+                      "weight" => $product->weight,
                       "slug" => $product->slug,
                       "image" => $product->image
                   ]
@@ -41,6 +42,7 @@ class CartController extends Controller
       // if cart not empty then check if this product exist then increment quantity
       if(isset($cart[$id])) {
           $cart[$id]['quantity']++;
+          $cart[$id]['weight'] += $cart[$id]['weight'];
           session()->put('cart', $cart);
           return redirect()->back()->with('success', 'Product added to cart successfully!');
       }
@@ -50,6 +52,7 @@ class CartController extends Controller
           "name" => $product->name,
           "quantity" => 1,
           "price" => $product->price,
+          "weight" => $product->weight,
           "slug" => $product->slug,
           "image" => $product->image
       ];
@@ -64,6 +67,7 @@ class CartController extends Controller
           $cart = session()->get('cart');
 
           $cart[$request->id]["quantity"] = $request->quantity;
+          $cart[$request->id]["weight"] = $request->quantity * $cart[$request->id]["weight"];
 
           session()->put('cart', $cart);
 
@@ -99,5 +103,5 @@ class CartController extends Controller
       return redirect()->back();
   }
 
-  
+
 }

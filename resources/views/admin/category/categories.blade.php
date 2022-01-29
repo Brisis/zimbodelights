@@ -24,33 +24,19 @@
                         <i class="bi bi-globe2 small me-2"></i> Dashboard
                     </a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Orders</li>
+                <li class="breadcrumb-item active" aria-current="page">Categories</li>
             </ol>
         </nav>
     </div>
 
-    <!-- <div class="card">
+    <div class="card">
         <div class="card-body">
-            <div class="d-md-flex gap-4 align-items-center">
+            <div class="d-md-flex gap-4 justify-content-between">
                 <div class="d-none d-md-flex">All Categories</div>
-                <div class="d-md-flex gap-4 align-items-center">
-                    <form class="mb-3 mb-md-0">
-                        <div class="row g-3">
-                            <div class="col-md-12">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                    <button class="btn btn-outline-light" type="button">
-                                        <i class="bi bi-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <a href="{{ route('admin.categories.add_category') }}" class="btn btn-primary">Add Category</a>
-                </div>
+                <a href="{{ route('admin.categories.add_category') }}" class="btn btn-primary">Add Category</a>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <div class="table-responsive">
         <table class="table table-custom table-lg mb-0" id="orders">

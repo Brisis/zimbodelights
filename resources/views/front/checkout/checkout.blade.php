@@ -25,7 +25,7 @@
                       <label for='r_two'>
                          Make Payment
                       </label>
-                      @if($temp_user)
+                      @if($temp_user || auth()->user())
                       <form id="reset-form" action="{{ route('reset_temp') }}" method="POST" hidden>
                           @csrf
                           @method('POST')
@@ -58,6 +58,13 @@
                               <label for="c-name">Delivery Address</label>
                               <input type="text" class="form-control" id="buyer_address" placeholder="place of residence" name="buyer_address" required>
                           </div>
+                          <div class="form-floating mb-4">
+                              <select class="form-select" id="floatingSelect1" aria-label="Floating label select example" name="delivery_method" required>
+                                  <option value="standard" selected>Standard</option>
+                                  <option value="nextday">Next Day</option>
+                              </select>
+                              <label for="floatingSelect1">Delivery Options</label>
+                          </div>
                           @else
                           <div class="form-floating mb-4">
                               <label for="c-name">Buyer Name</label>
@@ -70,6 +77,13 @@
                           <div class="form-floating mb-4">
                               <label for="c-name">Delivery Address</label>
                               <input type="text" class="form-control" readonly="readonly" id="buyer_address" placeholder="place of residence" name="buyer_address" @if(auth()->user()) value="{{ auth()->user()->address }}" @else value="{{ $temp_user['address'] }}" @endif>
+                          </div>
+                          <div class="form-floating mb-4">
+                              <select class="form-select" id="floatingSelect1" aria-label="Floating label select example" name="delivery_method" required>
+                                  <option value="standard" selected>Standard</option>
+                                  <option value="nextday">Next Day</option>
+                              </select>
+                              <label for="floatingSelect1">Delivery Options</label>
                           </div>
                           @endif
                           @if(!session('curr_order')) <button class="btn btn-solid w-100 mb-3" type="submit">Proceed</button> @endif

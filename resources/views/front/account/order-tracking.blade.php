@@ -29,7 +29,7 @@
           </a>
 
           <div class="price">
-            <h4>$@convert($order->total)</h4>
+            <h4>£@convert($order->total)</h4>
           </div>
         </div>
       </div>
@@ -73,7 +73,7 @@
       </div>
       <div class="order-track-text">
         <p class="order-track-text-stat"> Delivered</p>
-        <span class="order-track-text-sub">20/05/2020</span>
+        <span class="order-track-text-sub">@if($order->date_delivered) {{ date('d-m-Y', strtotime($order->date_delivered)) }} @endif</span>
       </div>
     </div>
   </div>
@@ -98,13 +98,13 @@
     <div class="order-details">
       <ul>
         <li>
-          <h4>Delivery <span>$10</span></h4>
+          <h4>Delivery <span>£@convert($order->delivery_fees)</span></h4>
         </li>
       </ul>
       <div class="total-amount">
-        <h4>Total Amount <span>$@convert($order->total)</span></h4>
+        <h4>Total Amount <span>£@convert($order->total)</span></h4>
       </div>
-      <a href="javascript:window.print()" class="btn btn-outline content-color w-100 mt-4">Download Invoice</a>
+      <a href="{{ route('checkout_prev', $order) }}" class="btn btn-outline content-color w-100 mt-4">Download Invoice</a>
     </div>
   </div>
   <!-- order details section end -->

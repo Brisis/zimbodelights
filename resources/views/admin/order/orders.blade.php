@@ -91,7 +91,7 @@
                 </td>
                 <td>{{ $order->buyer_name }}</td>
                 <td>{{ $order->created_at->diffForHumans() }}</td>
-                <td>$@convert($order->total)</td>
+                <td>£@convert($order->total)</td>
                 <td>
                   @if($order->status == 'pending')
                   <span class="badge bg-primary">Processing</span>

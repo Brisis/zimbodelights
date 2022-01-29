@@ -45,30 +45,30 @@
     <!-- header end -->
 
     <section class="px-15 top-space mt-5">
-      <form class="address-form-section px-15">
+      @if(session('success'))
+        <div class="alert alert-success">
+          {{ session('success') }}
+        </div>
+        @endif
+      <form action="{{ route('contact') }}" method="post" class="address-form-section px-15">
+        @csrf
           <div class="mb-4">
             <h4 class="fw-bold mb-1">Send us your Query</h4>
           </div>
           <div class="form-floating mb-4">
-              <select class="form-select" id="floatingSelect1" aria-label="Floating label select example">
-                  <option selected disabled value="1">Select state</option>
-                  <option value="london">London</option>
-                  <option value="Manchester">Manchester</option>
-              </select>
-              <label for="floatingSelect1">state/province/region</label>
-          </div>
-          <div class="form-floating mb-4">
-              <input type="text" class="form-control" id="one" placeholder="Full Name">
+              <input type="text" class="form-control" id="one" placeholder="Full Name" name="name">
               <label for="one">Full Name</label>
+              <span class="text-danger">{{ $errors->first('name') }}</span>
           </div>
           <div class="form-floating mb-4">
-              <input type="email" class="form-control" id="two" placeholder="Email Address">
+              <input type="email" class="form-control" id="two" placeholder="Email Address" name="email">
               <label for="two">Email</label>
+              <span class="text-danger">{{ $errors->first('email') }}</span>
           </div>
           <div class="mb-4">
-
               <label for="three">Message Detail</label>
-              <textarea name="message" class="form-control" rows="4" placeholder="Message body"></textarea>
+              <textarea name="comment" class="form-control" rows="4" placeholder="Message body"></textarea>
+              <span class="text-danger">{{ $errors->first('comment') }}</span>
           </div>
 
           <button type="submit" class="btn btn-solid w-100">Send Message</button>

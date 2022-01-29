@@ -46,7 +46,7 @@ class AdminProductController extends Controller
 
     $product->stock = $request->stock ? $request->stock : $product->stock;
 
-    $product->description = $request->description ? $request->description : $product->description;
+    $product->weight = $request->weight ? $request->weight : $product->weight;
 
     $product->save();
     $request->session()->flash('edit_done', 'Product details updated.');
@@ -158,6 +158,7 @@ class AdminProductController extends Controller
       'price' => 'required|max:255',
       'category' => 'required|max:255',
       'stock' => 'required|max:255',
+      'weight' => 'required',
     ]);
 
     $slug = Str::slug($request->name, '-');
@@ -168,8 +169,9 @@ class AdminProductController extends Controller
       'slug' => $slug,
       'price' => $request->price,
       'stock' => $request->stock,
-      'discount' => $request->discount ? $request->discount : null,
-      'description' => $request->description ? $request->description : 'Not Available'
+      'weight' => $request->weight,
+      'discount' => $request->discount ? $request->discount : null
+      // 'description' => $request->description ? $request->description : 'Not Available'
     ]);
 
     return redirect()->route('admin.products.add_product_images', $product);

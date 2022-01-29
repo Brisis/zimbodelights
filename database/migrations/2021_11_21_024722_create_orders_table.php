@@ -17,12 +17,14 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->double('total');
+            $table->double('delivery_fees');
             $table->string('buyer_name');
             $table->string('buyer_email');
             $table->text('buyer_address');
             $table->string('status')->default('pending');
             $table->boolean('is_paid')->default(false);
-            $table->string('payment_method');
+            $table->string('payment_method')->default('Zimbodelights');
+            $table->string('delivery_method');
             $table->text('date_delivered')->nullable();
             $table->timestamps();
         });

@@ -39,12 +39,16 @@ Route::get('/', [FrontDashboardController::class, 'index'])->name('home');
 Route::get('/deals', [FrontDashboardController::class, 'deals'])->name('deals');
 Route::get('/about', [FrontDashboardController::class, 'about'])->name('about');
 Route::get('/contact', [FrontDashboardController::class, 'contact'])->name('contact');
-Route::get('/terms-and-conditions', [FrontDashboardController::class, 'terms'])->name('terms');
+Route::post('/contact', [FrontDashboardController::class, 'contactPost']);
 
+Route::get('/terms-and-conditions', [FrontDashboardController::class, 'terms'])->name('terms');
 
 //Product Routes
 Route::get('/search/', [ProductController::class, 'search'])->name('search');
 Route::get('/product/{product:slug}', [ProductController::class, 'product'])->name('product');
+
+Route::post('/notify/{product}', [FrontDashboardController::class, 'notify'])->name('notify');
+
 Route::middleware('auth')->post('/add_review/{product}', [ProductController::class, 'addReview'])->name('add_review');
 
 Route::post('/subscribed', [FrontDashboardController::class, 'subscribe'])->name('subscribe');
@@ -78,6 +82,7 @@ Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout
 Route::post('/reset_temp', [CheckoutController::class, 'resetDetails'])->name('reset_temp');
 
 Route::get('/checkout_done', [CheckoutController::class, 'checkoutDone'])->name('checkout_done');
+Route::get('/prev_order/{order}', [CheckoutController::class, 'checkoutPrev'])->name('checkout_prev');
 
 Route::post('/create_order', [PayPalController::class, 'createOrder'])->name('create_order');
 

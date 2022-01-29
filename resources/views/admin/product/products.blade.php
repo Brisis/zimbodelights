@@ -90,7 +90,7 @@
                             <span class="text-danger">Out of Stock</span>
                           @endif
                         </td>
-                        <td>$@convert($product->price)</td>
+                        <td>£@convert($product->price)</td>
                         <td>{{ date('d/m/Y', strtotime($product->created_at)) }}</td>
                         <td class="text-end">
                             <a href="{{ route('admin.products.product', $product->id) }}" class="">Show Product</a>

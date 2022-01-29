@@ -52,13 +52,13 @@ class StripeController extends Controller
       }
 
       $customer = Stripe::customers()->create([
-        'name' => $user ? $user->fullname : $temp_user['name'],
+        'name' => $user ? $user->name : $temp_user['name'],
         'email' => $user ? $user->email : $temp_user['email'],
         'address'=> [
           'line1' => $user ? $user->address : $temp_user['address'],
         ],
         'shipping' => [
-          'name' => $user ? $user->fullname : $temp_user['name'],
+          'name' => $user ? $user->name : $temp_user['name'],
           'address' => [
             'line1' => $user ? $user->address : $temp_user['address'],
           ]
@@ -68,13 +68,14 @@ class StripeController extends Controller
 
       $charge = Stripe::charges()->create([
         'customer' => $customer['id'],
-        'currency' => 'USD',
+        'currency' => 'GBP',
         'amount' => $order->total,
         'description' => 'Payment for order no: ' . $order->id
       ]);
 
       if ($charge['status'] == 'succeeded') {
         $order->is_paid = true;
+        $order->payment_method = 'Stripe/Card/Mastercard';
         $order->save();
 
         $request->session()->forget('cart');

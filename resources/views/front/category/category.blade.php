@@ -13,11 +13,50 @@
             </a>
         </div>
         <div class="header-option">
-            <ul>
-                <li>
-                    <a title="Add to Cart" href="{{ route('cart') }}"><i class="iconly-Buy icli"></i></a>
-                </li>
-            </ul>
+          <ul>
+            <!-- search panel start -->
+            <div class="search-panel xl-space px-15">
+              <div class="search-bar" style="width:100%;">
+                <form class="" action="{{ route('search') }}" method="get">
+                      <input class="form-control form-theme" placeholder="Search" name="search">
+                      <i class="iconly-Search icli search-icon"></i>
+                </form>
+              </div>
+            </div>
+            <!-- search panel end -->
+            <li class="px-2"></li>
+            <li>
+              <a href="{{ route('cart') }}">
+                <style media="screen">
+                .badge {
+                  padding-left: 9px;
+                  padding-right: 9px;
+                  -webkit-border-radius: 9px;
+                  -moz-border-radius: 9px;
+                  border-radius: 9px;
+                  }
+
+                  .label-warning[href],
+                  .badge-warning[href] {
+                  background-color: #c67605;
+                  }
+                  #lblCartCount {
+                    font-size: 12px;
+                    background: #ff0000;
+                    color: #fff;
+                    padding: 0 5px;
+                    vertical-align: top;
+                    margin-left: -10px;
+                  }
+                </style>
+                <i class="iconly-Buy icli"></i>
+                @if(session('cart'))
+                  <span class='badge badge-warning' id='lblCartCount'>{{ count(session('cart')) }}</span>
+                @endif
+              </a>
+
+            </li>
+          </ul>
         </div>
     </header>
     <!-- header end -->
@@ -41,7 +80,7 @@
     <section class="px-15 lg-t-space" id="app">
       <div class="row gy-3 gx-3">
         @foreach($products as $product)
-        <div class="col-6">
+        <div class="col-md-4 col-6">
           <div class="product-box ratio_square">
             <div class="img-part">
               <a href="{{ route('product', $product->slug) }}"><img src="{{ asset($product->image) }}" alt="" class="img-fluid bg-img"></a>
@@ -57,9 +96,9 @@
                 <h4>{{ $product->name }}</h4>
               </a>
               <div class="price">
-                <h4>$@convert($product->price)
+                <h4>£@convert($product->price)
                   @if($product->discount)
-                  <del>$@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
+                  <del>£@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
                   @endif
                 </h4>
               </div>

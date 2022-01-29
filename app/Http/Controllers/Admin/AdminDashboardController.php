@@ -23,7 +23,9 @@ class AdminDashboardController extends Controller
 
     $sales = 0;
     foreach ($orders as $order) {
-      $sales += $order->total;
+      if ($order->is_paid) {
+        $sales += $order->total;
+      }
     }
 
 

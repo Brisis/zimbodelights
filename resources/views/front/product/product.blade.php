@@ -12,16 +12,52 @@
                 </div>
             </a>
         </div>
-        <!-- <div class="header-option">
-            <ul>
-                <li>
-                    <a href=""><img src="{{ asset('static/svg/share-2.svg') }}" class="img-fluid" alt=""></a>
-                </li>
-                <li>
-                  <a href="{{ route('cart') }}"><i class="iconly-Buy icli"></i></a>
-                </li>
-            </ul>
-        </div> -->
+        <div class="header-option">
+          <ul>
+            <!-- search panel start -->
+            <div class="search-panel xl-space px-15">
+              <div class="search-bar" style="width:100%;">
+                <form class="" action="{{ route('search') }}" method="get">
+                      <input class="form-control form-theme" placeholder="Search" name="search">
+                      <i class="iconly-Search icli search-icon"></i>
+                </form>
+              </div>
+            </div>
+            <!-- search panel end -->
+            <li class="px-2"></li>
+            <li>
+              <a href="{{ route('cart') }}">
+                <style media="screen">
+                .badge {
+                  padding-left: 9px;
+                  padding-right: 9px;
+                  -webkit-border-radius: 9px;
+                  -moz-border-radius: 9px;
+                  border-radius: 9px;
+                  }
+
+                  .label-warning[href],
+                  .badge-warning[href] {
+                  background-color: #c67605;
+                  }
+                  #lblCartCount {
+                    font-size: 12px;
+                    background: #ff0000;
+                    color: #fff;
+                    padding: 0 5px;
+                    vertical-align: top;
+                    margin-left: -10px;
+                  }
+                </style>
+                <i class="iconly-Buy icli"></i>
+                @if(session('cart'))
+                  <span class='badge badge-warning' id='lblCartCount'>{{ count(session('cart')) }}</span>
+                @endif
+              </a>
+
+            </li>
+          </ul>
+        </div>
     </header>
     <!-- header end -->
     <style media="screen">
@@ -76,19 +112,25 @@
                     <h6 class="content-color">({{ count($reviews) }} Reviews)</h6>
                 </div>
                 <div class="price">
-                  <h4 style="font-size: 14pt">$@convert($product->price)
+                  <h4 style="font-size: 14pt">£@convert($product->price)
                     @if($product->discount)
-                    <del>$@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
+                    <del>£@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
                     @endif
                   </h4>
                 </div>
             </div>
         </div>
         <div class="divider"></div>
-        <div class="product-detail-box px-15">
+        <!-- <div class="product-detail-box px-15">
             <h4 class="page-title mb-1">Product Details</h4>
             <h4 class="content-color mb-3">{{ $product->description }}</h4>
-        </div>
+        </div> -->
+        @if(session('success'))
+          <div class="alert alert-success">
+            {{ session('success') }}
+          </div>
+          @endif
+        <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasnotify" class="btn btn-solid"><i class="iconly-Notification icbo"></i> Notify when available</a>
         <div class="divider"></div>
 
         <div class="product-detail-box px-15">
@@ -164,9 +206,9 @@
                             <h4>{{ $product->name }}</h4>
                         </a>
                         <div class="price">
-                          <h4>$@convert($product->price)
+                          <h4>£@convert($product->price)
                             @if($product->discount)
-                            <del>$@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
+                            <del>£@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
                             @endif
                           </h4>
                         </div>
@@ -232,6 +274,30 @@
       </form>
     </div>
     <!-- add review canvas end -->
+
+    <!-- notify canvas start -->
+    <div class="offcanvas offcanvas-bottom h-auto" tabindex="-1" id="offcanvasnotify">
+      <form action="{{ route('notify', $product->id) }}" method="post">
+        @csrf
+        <div class="offcanvas-body">
+            <h2 class="mb-2">Get Notified when {{ $product->name }} is in stock.</h2>
+            <h4 class="content-color mt-2 mb-2">Email Address</h4>
+            <div class="mb-4 section-b-space">
+                <input class="form-control" name="email" required>
+            </div>
+            <div class="cart-bottom row m-0">
+                <div>
+                    <div class="left-content col-5">
+                        <a data-bs-dismiss="offcanvas" href="javascript:void(0)" class="title-color">BACK</a>
+                    </div>
+                    <button type="submit"
+                        class="btn btn-solid col-7 text-uppercase">Submit</button>
+                </div>
+            </div>
+        </div>
+      </form>
+    </div>
+    <!-- notify canvas end -->
 
     <!-- remove item canvas start -->
       <div class="offcanvas offcanvas-bottom h-auto removecart-canvas" id="removecart">

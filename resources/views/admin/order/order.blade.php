@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="row g-4">
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-12 col-sm-12">
                             <div class="card">
                                 <div class="card-body d-flex flex-column gap-3">
                                     <div class="">
@@ -78,7 +78,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12">
+                        <!-- <div class="col-md-6 col-sm-12">
                             <div class="card">
                                 <div class="card-body d-flex flex-column gap-3">
                                     <div class="">
@@ -87,7 +87,7 @@
                                     <div>Card Holder Name: {{ $order->card_name }}</div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -97,14 +97,14 @@
                     <h6 class="card-title mb-4">Order Cost</h6>
                     <div class="row justify-content-center mb-3">
                         <div class="col-4 text-end">Shipping :</div>
-                        <div class="col-4">$10.00</div>
+                        <div class="col-4">£@convert($order->delivery_fees)</div>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-4 text-end">
                             <strong>Total :</strong>
                         </div>
                         <div class="col-4">
-                            <strong>$@convert($order->total)</strong>
+                            <strong>£@convert($order->total)</strong>
                         </div>
                     </div>
                 </div>
@@ -134,8 +134,8 @@
                                 </td>
                                 <td>{{ $product->product->name }}</td>
                                 <td>{{ $product->quantity }}</td>
-                                <td>$@convert($product->product->price)</td>
-                                <td>$@convert($product->price)</td>
+                                <td>£@convert($product->product->price)</td>
+                                <td>£@convert($product->price)</td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -263,8 +263,8 @@
 
         								<td>
         									Invoice #: {{ $order->id }}<br />
-        									Created: {{ date('d-m-Y', strtotime($order->created_at)) }}<br />
-        									Paid: {{ date('d-m-Y', strtotime($order->created_at)) }}
+                          Created: {{ date('d-m-Y', strtotime($order->created_at)) }}<br />
+                          Date Delivered: @if($order->date_delivered) {{ date('d-m-Y', strtotime($order->date_delivered)) }} @endif
         								</td>
         							</tr>
         						</table>
@@ -310,16 +310,16 @@
                 @foreach($products as $product)
         				<tr class="item">
         					<td>{{ $product->product->name }} x{{ $product->quantity }}</td>
-        					<td>$@convert($product->price)</td>
+        					<td>£@convert($product->price)</td>
         				</tr>
                 @endforeach
                 <tr class="item last">
                   <td></td>
-                  <td>Delivery: $10.0</td>
+                  <td>Delivery: £@convert($order->delivery_fees)</td>
                 </tr>
         				<tr class="total">
         					<td></td>
-        					<td>Total: $@convert($order->total)</td>
+        					<td>Total: £@convert($order->total)</td>
         				</tr>
         			</table>
         		</div>

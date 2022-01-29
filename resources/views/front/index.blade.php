@@ -12,23 +12,47 @@
     </a>
     <div class="header-option">
       <ul>
-        @if($socials)
-        <li>
-          <a target="_blank" href="{{ $socials->facebook }}"><img src="{{ asset('static/images/icons/fb.svg') }}" width="22px" class="img-fluid" alt=""></a>
-        </li>
-        <li>
-          <a target="_blank" href="{{ $socials->instagram }}"><img src="{{ asset('static/images/icons/insta.svg') }}" width="22px" class="img-fluid" alt=""></a>
-        </li>
-        <li>
-          <a target="_blank" href="{{ $socials->twitter }}"><img src="{{ asset('static/images/icons/tw.svg') }}" width="22px" class="img-fluid" alt=""></a>
-        </li>
-        @endif
+        <!-- search panel start -->
+        <div class="search-panel xl-space px-15">
+          <div class="search-bar" style="width:100%;">
+            <form class="" action="{{ route('search') }}" method="get">
+                  <input class="form-control form-theme" placeholder="Search" name="search">
+                  <i class="iconly-Search icli search-icon"></i>
+            </form>
+          </div>
+        </div>
+        <!-- search panel end -->
         <li class="px-2"></li>
         <li>
-          <a href="{{ route('cart') }}"><i class="iconly-Buy icli"></i></a>
-        </li>
-        <li>
-          <a href="{{ route('search') }}"><i class="iconly-Search icli"></i></a>
+          <a href="{{ route('cart') }}">
+            <style media="screen">
+            .badge {
+              padding-left: 9px;
+              padding-right: 9px;
+              -webkit-border-radius: 9px;
+              -moz-border-radius: 9px;
+              border-radius: 9px;
+              }
+
+              .label-warning[href],
+              .badge-warning[href] {
+              background-color: #c67605;
+              }
+              #lblCartCount {
+                font-size: 12px;
+                background: #ff0000;
+                color: #fff;
+                padding: 0 5px;
+                vertical-align: top;
+                margin-left: -10px;
+              }
+            </style>
+            <i class="iconly-Buy icli"></i>
+            @if(session('cart'))
+              <span class='badge badge-warning' id='lblCartCount'>{{ count(session('cart')) }}</span>
+            @endif
+          </a>
+
         </li>
       </ul>
     </div>
@@ -46,7 +70,7 @@
       <div>
         <div class="slider-box">
           <img src="{{ asset($banner->image) }}" class="img-fluid bg-img" alt="">
-          <div class="slider-content" style="left:40%;">
+          <div class="slider-content" style="left:35%;">
             <div class="text-center">
               @if($banner->title)<h2 class="text-white">{{ $banner->title }}</h2>@endif
               @if($banner->subtitle)<h1 style="color:#FFD700">{{ $banner->subtitle }}</h1>@endif
@@ -65,7 +89,7 @@
   <!-- category start -->
   <section class="category-section">
     <div class="title-section px-15 mt-3">
-      <h2 class="text-uppercase">Top Category</h2>
+      <h2 class="text-uppercase">Top Categories</h2>
     </div>
     <div class="row px-15">
 
@@ -157,9 +181,9 @@
                 </a>
                 <h5>{{ $product->category->name }}</h5>
                 <div class="price">
-                  <h4>$@convert($product->price)
+                  <h4>£@convert($product->price)
                     @if($product->discount)
-                    <del>$@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
+                    <del>£@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
                     @endif
                   </h4>
                 </div>
@@ -217,15 +241,17 @@
     </div>
   </section>
   <!-- timer banner end -->
-  @endif
-<div class="divider" style="background-color: #373435 !important;"></div>
+  <div class="divider" style="background-color: #373435 !important;"></div>
   <!-- deals section end -->
+  @endif
+
+
 
   <!-- tab section start -->
   <section class="pt-0 tab-section" id="app-two">
     <div class="title-section px-15 mt-3">
       <h2>Find your Groceries</h2>
-      <h3>Get a familiar test in Food</h3>
+      <!-- <h3>Get a familiar taste in Food</h3> -->
     </div>
     <div class="tab-section">
       <ul class="nav nav-tabs theme-tab pl-15">
@@ -263,9 +289,9 @@
                     <h4>{{ $product->name }}</h4>
                   </a>
                   <div class="price">
-                    <h4>$@convert($product->price)
+                    <h4>£@convert($product->price)
                       @if($product->discount)
-                      <del>$@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
+                      <del>£@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
                       @endif
                     </h4>
                   </div>
@@ -297,9 +323,9 @@
                     <h4>{{ $product->name }}</h4>
                   </a>
                   <div class="price">
-                    <h4>$@convert($product->price)
+                    <h4>£@convert($product->price)
                       @if($product->discount)
-                      <del>$@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
+                      <del>£@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
                       @endif
                     </h4>
                   </div>
@@ -330,9 +356,9 @@
                     <h4>{{ $product->name }}</h4>
                   </a>
                   <div class="price">
-                    <h4>$@convert($product->price)
+                    <h4>£@convert($product->price)
                       @if($product->discount)
-                      <del>$@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
+                      <del>£@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
                       @endif
                     </h4>
                   </div>
@@ -354,7 +380,6 @@
   <section class="pt-0 product-slider-section overflow-hidden" id="app-three">
     <div class="title-section px-15 mt-3">
       <h2>The Foodies Corner</h2>
-      <h3>Get all your favourite food in one pack. </h3>
     </div>
     <div class="tab-content px-15">
       <div class="row gy-3 gx-3">
@@ -377,9 +402,9 @@
                 <h4>{{ $product->name }}</h4>
               </a>
               <div class="price">
-                <h4>$@convert($product->price)
+                <h4>£@convert($product->price)
                   @if($product->discount)
-                  <del>$@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
+                  <del>£@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
                   @endif
                 </h4>
               </div>

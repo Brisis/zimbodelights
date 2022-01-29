@@ -107,9 +107,14 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="weight" class="form-label">Weight (g)</label>
+                            <input type="number" class="form-control" id="weight" name="weight" value="{{ $product->weight }}">
+                        </div>
+
+                        <!-- <div class="mb-3">
                             <label for="price" class="form-label">Description</label>
                             <textarea name="description" rows="3" class="form-control" name="description">{{ $product->description }}</textarea>
-                        </div>
+                        </div> -->
 
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>

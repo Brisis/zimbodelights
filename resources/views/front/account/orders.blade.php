@@ -29,7 +29,7 @@
                         <img src="{{ asset('static/images/truck.gif') }}" class="img-fluid order-img" alt="">
                         <div class="media-body">
                             <h4>Order No: #{{ $order->id }}</h4>
-                            <h5 class="content-color my-1">Price: $@convert($order->total)</h5>
+                            <h5 class="content-color my-1">Price: £@convert($order->total)</h5>
                             <a class="theme-color" href="{{ route('buyer.order', $order->id) }}">View Details</a>
                         </div>
                         <span class="status-label">ongoing</span>
@@ -66,7 +66,7 @@
                         <img src="{{ asset('static/images/truck.gif') }}" class="img-fluid order-img" alt="">
                         <div class="media-body">
                             <h4>Order No: #{{ $order->id }}</h4>
-                            <h5 class="content-color my-1">Price: $@convert($order->total)</h5>
+                            <h5 class="content-color my-1">Price: £@convert($order->total)</h5>
                             <a class="theme-color" href="{{ route('buyer.order', $order->id) }}">View Details</a>
                         </div>
                         <span class="status-label bg-theme text-white">delivered</span>
