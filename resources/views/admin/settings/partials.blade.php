@@ -23,6 +23,11 @@
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
+                    <a class="{{ request()->routeIs('admin.settings.admin_setup') ? 'nav-link active' : 'nav-link ' }}" href="{{ route('admin.settings.admin_setup') }}">
+                        <i class="bi bi-lock me-2"></i> Administration
+                    </a>
+                </li>
+                <!-- <li class="nav-item" role="presentation">
                     <a class="{{ request()->routeIs('admin.settings.settings') ? 'nav-link active' : 'nav-link ' }}" href="{{ route('admin.settings.settings') }}">
                         <i class="bi bi-lock me-2"></i> Credentials
                     </a>
@@ -36,7 +41,7 @@
                     <a class="{{ request()->routeIs('admin.settings.settings') ? 'nav-link active' : 'nav-link ' }}" href="{{ route('admin.settings.settings') }}">
                         <i class="bi bi-arrow-down-up me-2"></i> Integrations
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
