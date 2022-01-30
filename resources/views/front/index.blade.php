@@ -77,10 +77,10 @@
           <img src="{{ asset($banner->image) }}" class="img-fluid bg-img" alt="">
           <div class="slider-content" style="left:35%;">
             <div class="text-center">
-              @if($banner->title)<h2 class="text-white">{{ $banner->title }}</h2>@endif
+              @if($banner->title)<h2 style="color:#FF4C3B">{{ $banner->title }}</h2>@endif
               @if($banner->subtitle)<h1 style="color:#FFD700">{{ $banner->subtitle }}</h1>@endif
             <!--  <h6 class="text-white">Quick order Delivery</h6>-->
-              <a href="{{ $banner->url_link }}" class="btn btn-solid">BUY NOW</a>
+              <a href="{{ $banner->url_link }}" class="btn btn-solid">START SHOPPING</a>
             </div>
           </div>
         </div>
