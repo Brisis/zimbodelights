@@ -67,7 +67,10 @@ class CartController extends Controller
           $cart = session()->get('cart');
 
           $cart[$request->id]["quantity"] = $request->quantity;
-          $cart[$request->id]["weight"] = $request->quantity * $cart[$request->id]["weight"];
+
+          $a_product = Product::find($cart[$request->id]['item_id']);
+
+          $cart[$request->id]["weight"] = $request->quantity * $a_product->weight;
 
           session()->put('cart', $cart);
 
