@@ -88,11 +88,23 @@
                     $nextday = 3.55;
                     $standard = 3.67;
                   }
-
-                  if ($weight > 1000) {
+                  elseif (1000 <= $weight <= 2000) {
                     $nextday = 5.00;
                     $standard = 4.40;
                   }
+                  elseif (2000 < $weight <= 5000) {
+                    $nextday = 6.40;
+                    $standard = 6.64;
+                  }
+                  elseif (5000 < $weight <= 10000) {
+                    $nextday = 7.58;
+                    $standard = 7.82;
+                  }
+                  else {
+                    $nextday = 9.20;
+                    $standard = 9.44;
+                  }
+
                  ?>
                 <li>
                     <h4>Delivery <span>Nextday: £@convert($nextday) | Standard: £@convert($standard)</span></h4>

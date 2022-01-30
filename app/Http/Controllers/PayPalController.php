@@ -55,8 +55,7 @@ class PayPalController extends Controller
         $delivery_fees = 3.55;
       }
     }
-
-    if ($weight > 1000) {
+    elseif (1000 <= $weight <= 2000) {
       if ($del_method == 'standard') {
         $total = $subtotal + 4.40;
         $delivery_fees = 4.40;
@@ -64,6 +63,36 @@ class PayPalController extends Controller
       if ($del_method == 'nextday') {
         $total = $subtotal + 5.00;
         $delivery_fees = 5.00;
+      }
+    }
+    elseif (2000 < $weight <= 5000) {
+      if ($del_method == 'standard') {
+        $total = $subtotal + 6.64;
+        $delivery_fees = 6.64;
+      }
+      if ($del_method == 'nextday') {
+        $total = $subtotal + 6.40;
+        $delivery_fees = 6.40;
+      }
+    }
+    elseif (5000 < $weight <= 10000) {
+      if ($del_method == 'standard') {
+        $total = $subtotal + 7.82;
+        $delivery_fees = 7.82;
+      }
+      if ($del_method == 'nextday') {
+        $total = $subtotal + 7.58;
+        $delivery_fees = 7.58;
+      }
+    }
+    else {
+      if ($del_method == 'standard') {
+        $total = $subtotal + 9.44;
+        $delivery_fees = 9.44;
+      }
+      if ($del_method == 'nextday') {
+        $total = $subtotal + 9.20;
+        $delivery_fees = 9.20;
       }
     }
 

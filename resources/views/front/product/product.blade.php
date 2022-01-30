@@ -85,7 +85,7 @@
             {{ session('success') }}
           </div>
           @endif
-        <div class="pl-3">
+        <div class="ml-2">
           <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasnotify" class="btn btn-solid"><i class="iconly-Notification icbo"></i> Notify when available</a>
         </div>
         <div class="divider"></div>
