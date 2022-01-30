@@ -42,7 +42,10 @@ class CartController extends Controller
       // if cart not empty then check if this product exist then increment quantity
       if(isset($cart[$id])) {
           $cart[$id]['quantity']++;
-          $cart[$id]['weight'] += $cart[$id]['weight'];
+
+          $a_product = Product::find($cart[$id]['item_id']);
+
+          $cart[$id]['weight'] = $cart[$id]['quantity'] * $a_product->weight;
           session()->put('cart', $cart);
           return redirect()->back()->with('success', 'Product added to cart successfully!');
       }
