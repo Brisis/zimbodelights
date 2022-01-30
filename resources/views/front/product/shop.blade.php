@@ -16,7 +16,35 @@
     <div class="header-option">
       <ul>
         <li>
-          <a href="{{ route('cart') }}"><i class="iconly-Buy icli"></i></a>
+          <a href="{{ route('cart') }}">
+            <style media="screen">
+            .badge {
+              padding-left: 9px;
+              padding-right: 9px;
+              -webkit-border-radius: 9px;
+              -moz-border-radius: 9px;
+              border-radius: 9px;
+              }
+
+              .label-warning[href],
+              .badge-warning[href] {
+              background-color: #c67605;
+              }
+              #lblCartCount {
+                font-size: 12px;
+                background: #ff0000;
+                color: #fff;
+                padding: 0 5px;
+                vertical-align: top;
+                margin-left: -10px;
+              }
+            </style>
+            <i class="iconly-Buy icli"></i>
+            @if(session('cart'))
+              <span class='badge badge-warning' id='lblCartCount'>{{ count(session('cart')) }}</span>
+            @endif
+          </a>
+
         </li>
       </ul>
     </div>
