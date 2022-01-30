@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class RegisterController extends Controller
 {
@@ -17,7 +19,7 @@ class RegisterController extends Controller
      */
    public function __construct()
    {
-     $this->middleware(['guest']);
+     // $this->middleware(['guest']);
    }
 
     public function index()
@@ -39,7 +41,7 @@ class RegisterController extends Controller
         'password' => 'required|confirmed'
       ]);
 
-      User::create([
+      $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
         'password' => Hash::make($request->password)
@@ -49,7 +51,8 @@ class RegisterController extends Controller
         return back()->with('status', 'Invalid Login Details');
       }
 
-      return redirect()->route('buyer.dashboard');
+      event(new Registered($user));
+      return redirect()->route('verification.notice');
     }
 
     /**
@@ -59,9 +62,27 @@ class RegisterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+     //Email Verification
+
+    public function verify()
     {
-        //
+      return view('front.auth.verify-email');
+    }
+
+    public function verification(EmailVerificationRequest $request)
+    {
+      $request->fulfill();
+
+      return redirect()->route('buyer.dashboard');
+    }
+
+
+    public function resend(Request $request)
+    {
+      $request->user()->sendEmailVerificationNotification();
+
+      return back()->with('message', 'Verification link sent!');
     }
 
 }

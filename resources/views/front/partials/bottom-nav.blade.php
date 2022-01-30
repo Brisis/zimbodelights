@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <p class="copyright">ZimboDelights © <script>document.write(new Date().getFullYear())</script></p>
-                    <div class="d-flex justify-content-end">
+                    <div class="mt-3 d-flex justify-content-end">
                       <p>
                         <span><img src="{{ asset('static/images/paypal.png') }}" width="80" class="img-fluid rounded-1 mb-3" alt=""></span>
                         <span><img src="{{ asset('static/images/visa.png') }}" width="80" class="img-fluid rounded-1 mb-3" alt=""></span>

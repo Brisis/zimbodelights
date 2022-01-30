@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Banner;
 use App\Models\Deals;
 use App\Models\Social;
@@ -36,13 +37,29 @@ class SettingsController extends Controller
       ]);
     }
 
-    public function newsletter()
+    public function admin_setup()
     {
-      $newsletters = Newsletter::paginate(5);
+      $users = User::paginate(5);
 
-      return view('admin.settings.newsletter', [
-        'newsletters' => $newsletters
+      return view('admin.settings.users', [
+        'users' => $users
       ]);
+    }
+
+    public function makeAdmin(Request $request, User $user)
+    {
+      if ($user->is_admin) {
+        $user->is_admin = false;
+        $user->save();
+      }
+      else {
+        $user->is_admin = true;
+        $user->save();
+      }
+
+      $request->session()->flash('message', 'Admin Status Successfully Changed.');
+
+      return redirect()->back();
     }
 
     public function banners (Request $request)

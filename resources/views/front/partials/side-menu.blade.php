@@ -28,6 +28,15 @@
   <div class="sidebar-content">
     <ul class="link-section">
       <li>
+        <a href="{{ route('buyer.dashboard') }}">
+          <i class="iconly-Profile icli"></i>
+          <div class="content">
+            <h4>Account</h4>
+            <h6>My Profile</h6>
+          </div>
+        </a>
+      </li>
+      <li>
         <a href="{{ route('home') }}">
           <i class="iconly-Home icli"></i>
           <div class="content">
@@ -84,6 +93,22 @@
           </div>
         </a>
       </li>
+      @auth
+      <div class="divider"></div>
+      <li>
+        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+          <i class="iconly-Lock icli"></i>
+          <div class="content">
+            <h4>Logout</h4>
+            <h6>Logout of Account</h6>
+          </div>
+        </a>
+      </li>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
+          @csrf
+          @method('POST')
+      </form>
+      @endauth
     </ul>
   </div>
 </div>

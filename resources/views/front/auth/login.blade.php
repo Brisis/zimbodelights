@@ -41,7 +41,7 @@
                 <label for="remember">Remember Me</label>
             </div>
             <div class="text-end mb-4">
-                <a href="{{ route('home') }}" class="theme-color">Forgot Password ?</a>
+                <a href="{{ route('password.request') }}" class="theme-color">Forgot Password ?</a>
             </div>
             <button type="submit" class="btn btn-solid w-100">Sign in</button>
         </form>

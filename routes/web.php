@@ -25,11 +25,21 @@ use App\Http\Controllers\StripeController;
 //Front End Routes
 
 //Authentication
-Route::get('/signup', [RegisterController::class, 'index'])->name('signup');
-Route::post('/signup', [RegisterController::class, 'store']);
+Route::get('/signup', [RegisterController::class, 'index'])->middleware('guest')->name('signup');
+Route::post('/signup', [RegisterController::class, 'store'])->middleware('guest');
+
+Route::get('/email/verify', [RegisterController::class, 'verify'])->middleware('auth')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', [RegisterController::class, 'verification'])->middleware(['auth', 'signed'])->name('verification.verify');
+Route::post('/email/verification-notification', [RegisterController::class, 'resend'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::get('/signin', [LoginController::class, 'index'])->name('signin');
 Route::post('/signin', [LoginController::class, 'store']);
+
+Route::get('/forgot-password', [LoginController::class, 'forgot'])->middleware('guest')->name('password.request');
+Route::post('/forgot-password', [LoginController::class, 'forgotPost'])->middleware('guest')->name('password.email');
+
+Route::get('/reset-password/{token}', [LoginController::class, 'reset'])->middleware('guest')->name('password.reset');
+Route::post('/reset-password', [LoginController::class, 'resetPassword'])->middleware('guest')->name('password.update');
 
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
@@ -98,7 +108,7 @@ Route::post('/stripe_checkout', [StripeController::class, 'pay'])->name('stripe_
 Route::group([
   'prefix' => 'buyer',
   'as' => 'buyer.',
-  'middleware' => 'auth'
+  'middleware' => 'verified'
 ],
 function()
 {
@@ -184,7 +194,8 @@ function(){
     ], function () {
       Route::get('/', [SettingsController::class,'index'])->name("settings");
 
-      Route::get('/newsletter', [SettingsController::class,'newsletter'])->name("newsletter");
+      Route::get('/admin_setup', [SettingsController::class,'admin_setup'])->name("admin_setup");
+      Route::post('/make_admin/{user}', [SettingsController::class,'makeAdmin'])->name("make_admin");
 
       //Add
       Route::get('/add_contact', [SettingsController::class,'contact'])->name("add_contact");

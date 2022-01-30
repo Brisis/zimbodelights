@@ -18,21 +18,16 @@
 
     <!-- login section start -->
     <section class="form-section px-15 top-space section-b-space">
-        <h1>Forgot Password</h1>
-        @if(session('status'))
+        <h1>Verify Your Email</h1>
+        @if(session('message'))
           <div class="theme-color p-4 mb-3 text-center">
-            {{ session('status') }}
+            {{ session('message') }}
           </div>
         @endif
-        <form action="{{ route('password.email') }}" method="post">
+        <p>A verification email was sent to <b style="color: #FF4C3B;">{{auth()->user()->email}}</b> </p>
+        <form action="{{ route('verification.send') }}" method="post">
           @csrf
-            <div class="form-floating mb-4">
-                <input type="email" class="form-control" id="one" placeholder="Email" name="email">
-                @error('email') <span style="color:#dc3545">( {{ $message }} )</span> @enderror
-                <label for="one">Email</label>
-            </div>
-
-            <button type="submit" class="btn btn-solid w-100">Sign in</button>
+            <button type="submit" class="btn btn-solid w-100">Resend Verification</button>
         </form>
 
     </section>

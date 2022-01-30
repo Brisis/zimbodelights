@@ -75,7 +75,7 @@ class StripeController extends Controller
 
       if ($charge['status'] == 'succeeded') {
         $order->is_paid = true;
-        $order->payment_method = 'Stripe/Card/Mastercard';
+        $order->payment_method = 'Stripe/VisaCard/Mastercard';
         $order->save();
 
         $request->session()->forget('cart');

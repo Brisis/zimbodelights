@@ -41,6 +41,17 @@
     <!-- link section start -->
     <div class="sidebar-content">
         <ul class="link-section">
+          @if(auth()->user()->is_admin)
+          <li>
+              <a href="{{ route('admin.dashboard') }}">
+                  <i class="iconly-Lock icli"></i>
+                  <div class="content">
+                      <h4>Administration</h4>
+                      <h6>Go to Admin Dashboard</h6>
+                  </div>
+              </a>
+          </li>
+          @endif
             <li>
                 <a href="{{ route('buyer.orders') }}">
                     <i class="iconly-Document icli"></i>

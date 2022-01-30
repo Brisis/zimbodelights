@@ -22,7 +22,7 @@
           </div>
         </div>
         <!-- search panel end -->
-        <li class="px-2"></li>
+        <li class="px-1"></li>
         <li>
           <a href="{{ route('cart') }}">
             <style media="screen">
@@ -54,6 +54,11 @@
           </a>
 
         </li>
+        @guest
+        <li>
+          <a href="{{ route('signin') }}" style="color: #FF4C3B;">Signin</a>
+        </li>
+        @endguest
       </ul>
     </div>
   </header>
