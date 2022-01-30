@@ -55,7 +55,7 @@ class PayPalController extends Controller
         $delivery_fees = 3.55;
       }
     }
-    elseif (1000 <= $weight <= 2000) {
+    elseif ($weight >= 1000 && $weight <= 2000) {
       if ($del_method == 'standard') {
         $total = $subtotal + 4.40;
         $delivery_fees = 4.40;
@@ -65,7 +65,7 @@ class PayPalController extends Controller
         $delivery_fees = 5.00;
       }
     }
-    elseif (2000 < $weight <= 5000) {
+    elseif ($weight > 2000 && $weight <= 5000) {
       if ($del_method == 'standard') {
         $total = $subtotal + 6.64;
         $delivery_fees = 6.64;
@@ -75,7 +75,7 @@ class PayPalController extends Controller
         $delivery_fees = 6.40;
       }
     }
-    elseif (5000 < $weight <= 10000) {
+    elseif ($weight > 5000 && $weight <= 10000) {
       if ($del_method == 'standard') {
         $total = $subtotal + 7.82;
         $delivery_fees = 7.82;
