@@ -12,17 +12,18 @@
     </a>
     <div class="header-option">
       <ul>
-        <!-- search panel start -->
-        <div class="search-panel xl-space px-15">
-          <div class="search-bar" style="width:100%;">
-            <form class="" action="{{ route('search') }}" method="get">
-                  <input class="form-control form-theme" placeholder="Search" name="search">
-                  <i class="iconly-Search icli search-icon"></i>
-            </form>
+        <li>
+          <!-- search panel start -->
+          <div class="search-panel xl-space px-15">
+            <div class="search-bar" style="width:100%;">
+              <form class="" action="{{ route('search') }}" method="get">
+                    <input class="form-control form-theme" placeholder="Search" name="search">
+                    <i class="iconly-Search icli search-icon"></i>
+              </form>
+            </div>
           </div>
-        </div>
-        <!-- search panel end -->
-        <li class="px-1"></li>
+          <!-- search panel end -->
+        </li>
         <li>
           <a href="{{ route('cart') }}">
             <style media="screen">
@@ -52,13 +53,7 @@
               <span class='badge badge-warning' id='lblCartCount'>{{ count(session('cart')) }}</span>
             @endif
           </a>
-
         </li>
-        @guest
-        <li>
-          <a href="{{ route('signin') }}" style="color: #FF4C3B;">Signin</a>
-        </li>
-        @endguest
       </ul>
     </div>
   </header>
@@ -132,7 +127,7 @@
     <section class="mb-5">
       <div class="row">
         <div class="col-md-4 col-12">
-          <div style="width: 100%; display: inline-block;background-color:#489834;text-align:center;padding: 10px;border-radius: 5px;">
+          <div style="width: 100%; display: inline-block;background-color:#489834;text-align:center;padding: 10px;">
               <div class="brand-box">
                 <img src="{{ asset('static/images/icons/delivery.png') }}" style="filter:invert(100%)" width="50" class="img-fluid" alt="">
                 <h3 class="text-white text-uppercase">Fast Shipping</h3>
@@ -142,7 +137,7 @@
         </div>
 
         <div class="col-md-4 col-12">
-          <div style="width: 100%; display: inline-block;background-color:red;text-align:center;padding: 10px;border-radius: 5px;">
+          <div style="width: 100%; display: inline-block;background-color:red;text-align:center;padding: 10px;">
               <div class="brand-box">
                 <img src="{{ asset('static/images/icons/payment.png') }}" style="filter:invert(100%)" width="50" class="img-fluid" alt="">
                 <h3 class="text-white text-uppercase">Secure Payment</h3>
@@ -152,7 +147,7 @@
         </div>
 
         <div class="col-md-4 col-12">
-          <div style="width: 100%; display: inline-block;background-color:#f9b041;text-align:center;padding: 10px;border-radius: 5px;">
+          <div style="width: 100%; display: inline-block;background-color:#f9b041;text-align:center;padding: 10px;">
               <div class="brand-box">
                 <img src="{{ asset('static/images/icons/rocket.png') }}" style="filter:invert(100%)" width="50" class="img-fluid" alt="">
                 <h3 class="text-white text-uppercase">next day delivery</h3>
