@@ -48,8 +48,8 @@ class SettingsController extends Controller
 
     public function makeAdmin(Request $request)
     {
-      $user = User::find($request->id);
-      
+      $user = User::find($request->userId);
+
       if ($user->is_admin) {
         $user->is_admin = false;
         $user->save();
