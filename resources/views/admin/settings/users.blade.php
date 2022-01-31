@@ -58,7 +58,11 @@
                           @endif
                         </td>
                         <td class="text-end">
-                            <a href="{{ route('admin.settings.make_admin', $user) }}" class="btn-sm btn-primary">Change Status</a>
+                            <a href="#" onclick="event.preventDefault(); document.getElementById('post-form').submit();" class="btn-sm btn-primary">Change Status</a>
+                            <form id="post-form" action="{{ route('admin.settings.make_admin', $user) }}" method="POST" hidden>
+                                @csrf
+                                @method('POST')
+                            </form>
                         </td>
                     </tr>
                     @endforeach

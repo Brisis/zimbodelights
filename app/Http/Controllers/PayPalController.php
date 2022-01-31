@@ -22,7 +22,7 @@ class PayPalController extends Controller
   public function createOrder(Request $request)
   {
     $user = auth()->user();
-    $admin = User::where('is_admin', true)->first();
+    $admin = User::where('email', 'admin@zimbodelights.com');
     $temp_user = session()->get('temp_user');
 
     if ($user) {

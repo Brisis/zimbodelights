@@ -55,7 +55,7 @@ class CheckoutController extends Controller
   public function createOrder(Request $request)
   {
     $user = auth()->user();
-    $admin = User::where('is_admin', true)->first();
+    $admin = User::where('email', 'admin@zimbodelights.com');
     $temp_user = session()->get('temp_user');
 
     $cart = session()->get('cart');
@@ -136,7 +136,7 @@ class CheckoutController extends Controller
   public function checkoutDone(Request $request)
   {
     $user = auth()->user();
-    $admin = User::where('is_admin', true)->first();
+    $admin = User::where('email', 'admin@zimbodelights.com');
     $temp_user = session()->get('temp_user');
 
     $curr_order = session()->get('curr_order');
