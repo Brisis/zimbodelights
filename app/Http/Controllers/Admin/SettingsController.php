@@ -48,15 +48,15 @@ class SettingsController extends Controller
 
     public function makeAdmin(Request $request)
     {
-      $user = User::find($request->userId);
+      $admin = User::find($request->userId);
 
-      if ($user->is_admin) {
-        $user->is_admin = false;
-        $user->save();
+      if ($admin->is_admin) {
+        $admin->is_admin = false;
+        $admin->save();
       }
       else {
-        $user->is_admin = true;
-        $user->save();
+        $admin->is_admin = true;
+        $admin->save();
       }
 
       $request->session()->flash('message', 'Admin Status Successfully Changed.');
