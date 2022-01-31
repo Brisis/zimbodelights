@@ -43,27 +43,26 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $customer)
+                    @foreach($users as $user)
                     <tr>
                         <td>
-                            <a href="">#{{ $customer->id }}</a>
+                            <a href="">#{{ $user->id }}</a>
                         </td>
-                        <td>{{ $customer->name }}</td>
-                        <td>{{ $customer->email }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
                         <td>
-                          @if($customer->is_admin)
+                          @if($user->is_admin)
                             <span class="badge badge-success bg-success">Is Admin</span>
                           @else
                             <span class="badge badge-warning bg-warning">Not Admin</span>
                           @endif
                         </td>
                         <td class="text-end">
-                            <a href="#" onclick="event.preventDefault(); document.getElementById('post-form').submit();" class="btn-sm btn-primary">Change Status</a>
-                            <form id="post-form" action="{{ route('admin.settings.make_admin') }}" method="POST" hidden>
+                            <a href="{{ route('admin.settings.make_admin', $user) }}" class="btn-sm btn-primary">Change Status</a>
+                            <!-- <form id="post-form" action="{{ route('admin.settings.make_admin', $user) }}" method="POST" hidden>
                                 @csrf
-                                <input type="text" name="userId" value="{{ $customer->id }}">
                                 @method('POST')
-                            </form>
+                            </form> -->
                         </td>
                     </tr>
                     @endforeach
