@@ -195,7 +195,7 @@ function(){
       Route::get('/', [SettingsController::class,'index'])->name("settings");
 
       Route::get('/admin_setup', [SettingsController::class,'admin_setup'])->name("admin_setup");
-      Route::post('/make_admin/{user}', [SettingsController::class,'makeAdmin'])->name("make_admin");
+      Route::post('/make_admin', [SettingsController::class,'makeAdmin'])->name("make_admin");
 
       //Add
       Route::get('/add_contact', [SettingsController::class,'contact'])->name("add_contact");

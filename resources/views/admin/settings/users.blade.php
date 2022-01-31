@@ -59,8 +59,9 @@
                         </td>
                         <td class="text-end">
                             <a href="#" onclick="event.preventDefault(); document.getElementById('post-form').submit();" class="btn-sm btn-primary">Change Status</a>
-                            <form id="post-form" action="{{ route('admin.settings.make_admin', $user) }}" method="POST" hidden>
+                            <form id="post-form" action="{{ route('admin.settings.make_admin') }}" method="POST" hidden>
                                 @csrf
+                                <input type="text" name="userId" value="{{ $user->id }}">
                                 @method('POST')
                             </form>
                         </td>
