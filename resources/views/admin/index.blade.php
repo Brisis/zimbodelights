@@ -52,7 +52,7 @@
                     </div>
                     <h4 class="mb-3">Sales</h4>
                     <div class="d-flex mb-3">
-                        <div class="display-7">$@convert($sales)</div>
+                        <div class="display-7">£@convert($sales)</div>
                         <div class="ms-auto" id="total-sales"></div>
                     </div>
                     <!-- <div class="text-danger">
