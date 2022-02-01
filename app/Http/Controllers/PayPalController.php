@@ -22,7 +22,7 @@ class PayPalController extends Controller
   public function createOrder(Request $request)
   {
     $user = auth()->user();
-    $admin = User::where('email', 'admin@zimbodelights.com');
+    $admin = User::where('email', 'admin@zimbodelights.com')->first();
     $temp_user = session()->get('temp_user');
 
     if ($user) {
@@ -33,15 +33,11 @@ class PayPalController extends Controller
     }
 
     $cart = session()->get('cart');
-    $subtotal = 0;
-    $weight = 0;
+    
+    $subtotal = $request->subtotal;
+    $weight = $request->weight;
 
     $delivery_fees = 0;
-
-    foreach($cart as $product => $item) {
-      $subtotal += $item['price'] * $item['quantity'];
-      $weight += $item['weight'] * $item['quantity'];
-    }
 
     $del_method = $request->delivery_method;
 
@@ -100,12 +96,20 @@ class PayPalController extends Controller
     $buyer_name = $user ? $user->name : $request->buyer_name;
     $buyer_email = $user ? $user->email : $request->buyer_email;
     $buyer_address = $user ? $user->address : $request->buyer_address;
+    $buyer_city = $user ? $user->city : $request->city;
+    $buyer_country = $user ? $user->country : $request->country;
+    $buyer_zipcode = $user ? $user->zipcode : $request->zipcode;
+    $buyer_phone = $user ? $user->phone : $request->phone;
 
     $order = Order::create([
       'user_id' => $user ? $user->id : $admin->id,
       'buyer_name' => $buyer_name,
       'buyer_email' => $buyer_email,
       'buyer_address' => $buyer_address,
+      'buyer_city' => $buyer_city,
+      'buyer_country' => $buyer_country,
+      'buyer_zipcode' => $buyer_zipcode,
+      'buyer_phone' => $buyer_phone,
       'delivery_method' => $request->delivery_method,
       'delivery_fees' => $delivery_fees,
       'total' => $total
@@ -131,7 +135,11 @@ class PayPalController extends Controller
       $temp_user = [
         "name" => $request->buyer_name,
         "email" => $request->buyer_email,
-        "address" => $request->buyer_address
+        "address" => $request->buyer_address,
+        "city" => $request->city,
+        "country" => $request->country,
+        "zipcode" => $request->zipcode,
+        "phone" => $request->phone
       ];
 
       session()->put('temp_user', $temp_user);

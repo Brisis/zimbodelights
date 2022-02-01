@@ -90,6 +90,7 @@ Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout
 //Route::post('/create_order', [CheckoutController::class, 'createOrder'])->name('create_order');
 // Route::get('/pay', [CheckoutController::class, 'pay'])->name('pay');
 Route::post('/reset_temp', [CheckoutController::class, 'resetDetails'])->name('reset_temp');
+Route::post('/reset_checkout', [CheckoutController::class, 'resetCheckout'])->name('reset_checkout');
 
 Route::get('/checkout_done', [CheckoutController::class, 'checkoutDone'])->name('checkout_done');
 Route::get('/prev_order/{order}', [CheckoutController::class, 'checkoutPrev'])->name('checkout_prev');
@@ -217,7 +218,7 @@ function(){
 
 
       Route::delete('/{deal}/delete_deals', [SettingsController::class,'deleteDeals'])->name("delete_deals");
-      Route::delete('/{banner}/delete_banner', [SettingsController::class,'deleteBanner'])->name("delete_banner");
+      Route::get('/{banner}/delete_banner', [SettingsController::class,'deleteBanner'])->name("delete_banner");
     });
 
 });

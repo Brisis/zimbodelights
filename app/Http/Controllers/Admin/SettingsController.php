@@ -196,6 +196,7 @@ class SettingsController extends Controller
       $this->validate($request, [
         'name' => 'required|max:255',
         'duration' => 'required|max:255',
+        'link' => 'required|max:255',
         'image_path' => 'required|image|mimes:jpg,jpeg,png,gif,svg,webp|max:2048'
       ]);
 
@@ -207,6 +208,7 @@ class SettingsController extends Controller
 
       Deals::create([
         'name' => $request->name,
+        'link' => $request->link,
         'duration' => $request->duration,
         'image' => $destination
       ]);
@@ -219,6 +221,8 @@ class SettingsController extends Controller
     public function editDeals(Request $request, Deals $deal)
     {
       $deal->name = $request->name ? $request->name : $deal->name;
+
+      $deal->link = $request->link ? $request->link : $deal->link;
 
       $deal->duration = $request->duration ? $request->duration : $deal->duration;
 

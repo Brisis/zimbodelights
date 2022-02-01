@@ -17,6 +17,10 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
+            $table->string('zipcode')->nullable();
+            $table->string('phone')->nullable();
             $table->string('profile_picture')->nullable();
             $table->boolean('is_seller')->default(false);
             $table->boolean('is_admin')->default(false);

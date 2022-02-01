@@ -5,7 +5,7 @@
     <!-- header start -->
     <header>
         <div class="back-links">
-            <a href="{{ route('home') }}">
+            <a href="{{ route('home') }}#categories">
                 <i class="iconly-Arrow-Left icli"></i>
                 <div class="content">
                     <h2>Shopping Cart</h2>
@@ -16,7 +16,7 @@
         <div class="header-option">
             <ul>
                 <li>
-                    <a href="#" onclick="event.preventDefault(); document.getElementById('cart-form').submit();" title="Remove All"><i class="iconly-Delete icli"></i></a>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('cart-form').submit();" title="Remove All"><i class="iconly-Delete icli text-danger"></i></a>
                     <form id="cart-form" action="{{ route('remove_all') }}" method="POST" hidden>
                         @csrf
                         @method('POST')
@@ -107,11 +107,11 @@
 
                  ?>
                 <li>
-                    <h4>Delivery <span>Nextday: £@convert($nextday) | Standard: £@convert($standard)</span></h4>
+                    <h4>Shipping <span>£@convert($standard)</span></h4>
                 </li>
             </ul>
             <div class="total-amount">
-                <h4>Total Amount <span>Nextday: £@convert($nextday + $total) | Standard: £@convert($standard + $total)</span></h4>
+                <h4>Total Amount <span>£@convert($standard + $total)</span></h4>
             </div>
         </div>
     </section>
@@ -160,13 +160,13 @@
     <div class="cart-bottom">
         <div>
             <div class="left-content">
-                <h4>Terms & Conditions</h4>
-                <a href="{{ route('terms') }}" class="theme-color">View details</a>
+                <h4>Continue,</h4>
+                <a href="{{ route('home') }}#categories" class="theme-color">Shopping</a>
             </div>
             @if(session('cart'))
               <a href="{{ route('checkout') }}" class="btn btn-solid">Checkout</a>
             @else
-              <a href="{{ route('home') }}" class="btn btn-solid">Continue Shopping</a>
+              <a href="{{ route('home') }}#categories" class="btn btn-solid">Continue Shopping</a>
             @endif
         </div>
     </div>
@@ -179,7 +179,7 @@
             <img src="{{ asset('static/images/empty-cart.png') }}" class="img-fluid" alt="">
             <h2>Whoops !! Cart is Empty</h2>
             <p>Looks like you haven’t add any products yet.</p>
-            <a href="{{ route('home') }}" class="btn btn-solid w-100">start shopping</a>
+            <a href="{{ route('home') }}#categories" class="btn btn-solid w-100">start shopping</a>
         </div>
     </section>
     <!-- empty cart end -->

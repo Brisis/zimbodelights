@@ -24,8 +24,8 @@ class CheckoutController extends Controller
 
     $user = auth()->user();
     if ($user) {
-      if (!$user->address) {
-        $request->session()->flash('add_address', "");
+      if (!$user->address || !$user->city || !$user->country || !$user->phone || !$user->zipcode) {
+        $request->session()->flash('missing', "Please Complete your Profile Details");
         return redirect()->route('buyer.settings');//back();
       }
     }
@@ -55,7 +55,7 @@ class CheckoutController extends Controller
   public function createOrder(Request $request)
   {
     $user = auth()->user();
-    $admin = User::where('email', 'admin@zimbodelights.com');
+    $admin = User::where('email', 'admin@zimbodelights.com')->first();
     $temp_user = session()->get('temp_user');
 
     $cart = session()->get('cart');
@@ -133,10 +133,23 @@ class CheckoutController extends Controller
     return redirect()->back();
   }
 
+  public function resetCheckout(Request $request)
+  {
+    $request->session()->forget('temp_user');
+
+    $curr_order = session()->get('curr_order');
+
+    $order = Order::where('id', $curr_order->id)->delete();
+
+    $request->session()->forget('curr_order');
+
+    return redirect()->back();
+  }
+
   public function checkoutDone(Request $request)
   {
     $user = auth()->user();
-    $admin = User::where('email', 'admin@zimbodelights.com');
+    $admin = User::where('email', 'admin@zimbodelights.com')->first();
     $temp_user = session()->get('temp_user');
 
     $curr_order = session()->get('curr_order');

@@ -9,7 +9,7 @@
             <a href="{{ route('home') }}">
                 <i class="iconly-Arrow-Left icli"></i>
                 <div class="content">
-                    <h2>help center, contact us</h2>
+                    <h2>contact us</h2>
                 </div>
             </a>
           </div>
@@ -26,6 +26,9 @@
                 <li>
                   <a target="_blank" href="https://twitter.com/zimbodelights"><img src="{{ asset('static/images/icons/tw.svg') }}" width="22px" class="img-fluid" alt=""></a>
                 </li>
+                <li>
+                  <a target="_blank" href="https://wa.me/447447542016"><img src="{{ asset('static/images/icons/wh.svg') }}" width="22px" class="img-fluid" alt=""></a>
+                </li>
               </ul>
               @else
               <ul>
@@ -37,6 +40,9 @@
                 </li>
                 <li>
                   <a target="_blank" href="{{ $footer_socials->twitter }}"><img src="{{ asset('static/images/icons/tw.svg') }}" width="22px" class="img-fluid" alt=""></a>
+                </li>
+                <li>
+                  <a target="_blank" href="{{ $footer_socials->whatsapp }}"><img src="{{ asset('static/images/icons/wh.svg') }}" width="22px" class="img-fluid" alt=""></a>
                 </li>
               </ul>
               @endif

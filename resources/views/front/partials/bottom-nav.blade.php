@@ -98,12 +98,14 @@
                                 <li><a target="_blank" href="https://facebook.com/zimbodelights"> > Facebook</a></li>
                                 <li><a target="_blank" href="https://instagram.com/zimbodelights"> > Instagram</a></li>
                                 <li><a target="_blank" href="https://twitter.com/zimbodelights"> > Twitter</a></li>
+                                <li><a target="_blank" href="https://wa.me/447447542016"> > Whatsapp</a></li>
                             </ul>
                             @else
                             <ul>
                                 <li><a target="_blank" href="{{ $footer_socials->facebook }}"> > Facebook</a></li>
                                 <li><a target="_blank" href="{{ $footer_socials->instagram }}"> > Instagram</a></li>
                                 <li><a target="_blank" href="{{ $footer_socials->twitter }}"> > Twitter</a></li>
+                                <li><a target="_blank" href="{{ $footer_socials->whatsapp }}"> > Whatsapp</a></li>
                             </ul>
                             @endif
                         </div>

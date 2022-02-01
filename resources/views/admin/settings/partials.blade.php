@@ -12,11 +12,11 @@
                         <i class="bi bi-clock me-2"></i> Deals Countdown
                     </a>
                 </li>
-                <li class="nav-item" role="presentation">
+                <!-- <li class="nav-item" role="presentation">
                     <a class="{{ request()->routeIs('admin.settings.add_contact') ? 'nav-link active' : 'nav-link ' }}" href="{{ route('admin.settings.add_contact') }}">
                         <i class="bi bi-phone me-2"></i> Contact Details
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item" role="presentation">
                     <a class="{{ request()->routeIs('admin.settings.add_socials') ? 'nav-link active' : 'nav-link ' }}" href="{{ route('admin.settings.add_socials') }}">
                         <i class="bi bi-facebook me-2"></i> Company Socials

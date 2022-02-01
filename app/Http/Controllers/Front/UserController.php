@@ -60,8 +60,21 @@ class UserController extends Controller
   {
     $user = auth()->user();
 
+    $this->validate($request, [
+      'name' => 'required',
+      'address' => 'required',
+      'city' => 'required',
+      'zipcode' => 'required',
+      'phone' => 'required',
+      'image_path' => 'image|mimes:jpg,jpeg,png,gif,svg,webp|max:2048'
+    ]);
+
     $user->name = $request->name;
     $user->address = $request->address;
+    $user->city = $request->city;
+    $user->country = $request->country ? $request->country : $user->country;
+    $user->zipcode = $request->zipcode;
+    $user->phone = $request->phone;
 
     if ($request->file('image_path')) {
 
@@ -82,53 +95,6 @@ class UserController extends Controller
     $user->save();
 
     $request->session()->flash('message', 'Account Details Updated Successfully.');
-
-    return redirect()->back();
-  }
-
-  public function editAddress()
-  {
-       return view('front.settings.edit-address');
-  }
-
-  public function addAddress(Request $request)
-  {
-
-    $this->validate($request, [
-      'country' => 'required|max:255',
-      'city' => 'required|max:255',
-      'phone' => 'required|string|max:255',
-      'shipping' => 'required|max:255'
-    ]);
-
-    $request->user()->addresses()->create([
-      'country' => $request->country,
-      'city' => $request->city,
-      'phone' => $request->phone,
-      'shipping' => $request->shipping
-    ]);
-
-    $request->session()->flash('message', 'Account Addresses Added Successfully.');
-
-    return redirect()->back();
-  }
-
-  public function updateAddress(Request $request)
-  {
-    $this->validate($request, [
-      'city' => 'required|max:255',
-      'phone' => 'required|string|max:255',
-      'shipping' => 'required|max:255'
-    ]);
-
-    $request->user()->addresses()->update([
-      'country' => $request->country ? $request->country : auth()->user()->addresses->country,
-      'city' => $request->city,
-      'phone' => $request->phone,
-      'shipping' => $request->shipping
-    ]);
-
-    $request->session()->flash('message', 'Account Addresses Updated Successfully.');
 
     return redirect()->back();
   }
@@ -175,37 +141,6 @@ class UserController extends Controller
       $request->session()->flash('message', 'Account Picture Uploaded.');
 
       return redirect()->back();
-  }
-
-  public function addVerification()
-  {
-       return view('front.settings.verify');
-  }
-
-  public function verify(Request $request)
-  {
-
-    $this->validate($request, [
-      'email' => 'required|max:255',
-      'purpose' => 'required',
-      'identification' => 'required'
-    ]);
-
-    $image = $request->file('identification');
-    $filename = time().'.'.$image->getClientOriginalExtension();
-
-    $destination = 'uploads/verification/'.$filename;
-    $image->move(public_path('uploads/verification/'), $filename);
-
-    auth()->user()->verifications()->create([
-      'email' => $request->email,
-      'purpose' => $request->purpose,
-      'identification' => $destination
-    ]);
-
-    $request->session()->flash('message', 'Account waiting Verification');
-
-    return redirect()->route('account.dashboard');
   }
 
   public function destroy($id)

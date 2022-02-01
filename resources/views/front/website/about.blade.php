@@ -13,7 +13,7 @@
                 </div>
             </a>
         </div>
-        
+
     </header>
     <!-- header end -->
 
@@ -72,7 +72,7 @@
         </div> -->
 
         <h4 class="fw-bold mb-3">Talk to Us</h4>
-        <p class="content-color">Sent us a message and get a quick reply through our <a href="{{ route('contact') }}">contact</a> page.</p>
+        <p class="content-color">Send us a message and get a quick reply through our <a href="{{ route('contact') }}">contact</a> page.</p>
     </section>
     <!-- section end -->
 

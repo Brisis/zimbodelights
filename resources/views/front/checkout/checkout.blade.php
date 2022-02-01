@@ -6,43 +6,97 @@
     <!-- header start -->
     <header>
         <div class="back-links">
-            <a href="{{ route('cart') }}">
-                <i class="iconly-Arrow-Left icli"></i>
+            <a href="#!">
                 <div class="content">
                     <h2>Payment Details</h2>
                     <h6>Step 2 of 2</h6>
                 </div>
             </a>
         </div>
+        <div class="header-option">
+            <ul>
+                <li>
+                    <a href="{{ route('home') }}" class="text-primary">Continue Shopping</a>
+                </li>
+            </ul>
+        </div>
     </header>
     <!-- header end -->
 
+    <?php $current_order = session('curr_order') ?>
+    <div>
+      <?php $total = 0; $weight = 0; ?>
+       @if(session('cart'))
+           @foreach(session('cart') as $id => $details)
+               <?php $total += $details['price'] * $details['quantity'] ?>
+               <?php $weight += $details['weight'] ?>
+           @endforeach
+       @endif
+    </div>
+
+    <?php
+      $nextday = 0;
+      $standard = 0;
+
+      if ($weight < 1000) {
+        $nextday = 3.55;
+        $standard = 3.67;
+      }
+      elseif ($weight >= 1000 && $weight <= 2000) {
+        $nextday = 5.00;
+        $standard = 4.40;
+      }
+      elseif ($weight > 2000 && $weight <= 5000) {
+        $nextday = 6.40;
+        $standard = 6.64;
+      }
+      elseif ($weight > 5000 && $weight <= 10000) {
+        $nextday = 7.58;
+        $standard = 7.82;
+      }
+      else {
+        $nextday = 9.20;
+        $standard = 9.44;
+      }
+
+     ?>
+
     <!-- payment method start -->
-    <section class="px-15 payment-method-section mt-5">
+
+    <div class="row mt-5">
+      <div class="col-md-6 col-12">
+        <section class="payment-method-section">
             <div class="card">
                 <div class="card-header">
                   <div class="btn btn-link d-flex justify-content-between">
                       <label for='r_two'>
-                         Make Payment
+                         Complete Checkout
                       </label>
-                      @if($temp_user || auth()->user())
-                      <form id="reset-form" action="{{ route('reset_temp') }}" method="POST" hidden>
+                      @if(!session('curr_order'))
+
+                        @if($temp_user || auth()->user())
+                        @if($temp_user)
+                          <form id="reset-form" action="{{ route('reset_temp') }}" method="POST" hidden>
+                              @csrf
+                              @method('POST')
+                          </form>
+                          <a class="text-danger" href="#" onclick="event.preventDefault(); document.getElementById('reset-form').submit();">Change Details</a>
+                          @else
+                          <a class="text-danger" href="{{ route('buyer.settings') }}">Change Details</a>
+                        @endif
+                        @endif
+
+                      @else
+                      <form id="reset-checkout" action="{{ route('reset_checkout') }}" method="POST" hidden>
                           @csrf
                           @method('POST')
                       </form>
-                      <a class="text-danger" href="#" onclick="event.preventDefault(); document.getElementById('reset-form').submit();">Reset Details</a>
+                      <a class="text-danger" href="#" onclick="event.preventDefault(); document.getElementById('reset-checkout').submit();">Change Details</a>
                       @endif
                   </div>
                 </div>
-                <div>
-
                     <div class="card-body">
-                     @if(session()->has('add_address'))
-                      <div class="card-header">
-                          <p>Please add your address in your Account Settings. Go <a class="badge badge-primary text-white" style="background: #FF4C3B;" href="{{ route('buyer.settings') }}">Here</a> to add now. </p>
-                      </div>
-                      @endif
-
+                      @if(!session('curr_order'))
                       <form class="pt-2" action="{{ route('create_order') }}" method="post" id="pay-form">
                         @csrf
                           @if(!$temp_user && !auth()->user())
@@ -59,35 +113,71 @@
                               <input type="text" class="form-control" id="buyer_address" placeholder="place of residence" name="buyer_address" required>
                           </div>
                           <div class="form-floating mb-4">
-                              <select class="form-select" id="floatingSelect1" aria-label="Floating label select example" name="delivery_method" required>
-                                  <option value="standard" selected>Standard</option>
-                                  <option value="nextday">Next Day</option>
+                              <input type="text" class="form-control" id="city" placeholder="City" name="city" required>
+                              <label for="two">*City</label>
+                          </div>
+                          <div class="form-floating mb-4">
+                              @include('front.partials.countries')
+                              <label for="floatingSelect1">*Country</label>
+                          </div>
+                          <div class="form-floating mb-4">
+                              <input type="text" class="form-control" id="postal" placeholder="Postal Code" name="zipcode" required>
+                              <label for="two">*Zip / Postal code</label>
+                          </div>
+                          <div class="form-floating mb-4">
+                              <input type="text" class="form-control" id="phone" placeholder="Phone Number" name="phone" required>
+                              <label for="two">*Phone</label>
+                          </div>
+                          <div class="form-floating mb-4">
+                              <select class="form-select" id="floatingSelect1" style="padding-top: 15px !important;" aria-label="Options" name="delivery_method" required>
+                                  <option value="standard" selected>Standard (£@convert($standard))</option>
+                                  <option value="nextday">Next Day (£@convert($nextday))</option>
                               </select>
                               <label for="floatingSelect1">Delivery Options</label>
                           </div>
                           @else
                           <div class="form-floating mb-4">
                               <label for="c-name">Buyer Name</label>
-                              <input type="text" class="form-control" readonly="readonly" id="buyer_name" placeholder="name of customer" name="buyer_name" @if(auth()->user()) value="{{ auth()->user()->name }}" @else value="{{ $temp_user['name'] }}" @endif>
+                              <input type="text" class="form-control" readonly="readonly" id="buyer_name" placeholder="name of customer" name="buyer_name" required @if(auth()->user()) value="{{ auth()->user()->name }}" @else value="{{ $temp_user['name'] }}" @endif>
                           </div>
                           <div class="form-floating mb-4">
                               <label for="c-name">Email</label>
-                              <input type="email" class="form-control" readonly="readonly" id="buyer_email" placeholder="your email" name="buyer_email" @if(auth()->user()) value="{{ auth()->user()->email }}" @else value="{{ $temp_user['email'] }}" @endif>
+                              <input type="email" class="form-control" readonly="readonly" id="buyer_email" placeholder="your email" name="buyer_email" required @if(auth()->user()) value="{{ auth()->user()->email }}" @else value="{{ $temp_user['email'] }}" @endif>
                           </div>
                           <div class="form-floating mb-4">
                               <label for="c-name">Delivery Address</label>
-                              <input type="text" class="form-control" readonly="readonly" id="buyer_address" placeholder="place of residence" name="buyer_address" @if(auth()->user()) value="{{ auth()->user()->address }}" @else value="{{ $temp_user['address'] }}" @endif>
+                              <input type="text" class="form-control" readonly="readonly" id="buyer_address" placeholder="place of residence" name="buyer_address" required @if(auth()->user()) value="{{ auth()->user()->address }}" @else value="{{ $temp_user['address'] }}" @endif>
                           </div>
                           <div class="form-floating mb-4">
-                              <select class="form-select" id="floatingSelect1" aria-label="Floating label select example" name="delivery_method" required>
-                                  <option value="standard" selected>Standard</option>
-                                  <option value="nextday">Next Day</option>
+                              <input type="text" class="form-control" readonly="readonly" id="city" placeholder="City" name="city" required @if(auth()->user()) value="{{ auth()->user()->city }}" @else value="{{ $temp_user['city'] }}" @endif>
+                              <label for="two">*City</label>
+                          </div>
+                          <div class="form-floating mb-4">
+                              <input type="text" class="form-control" readonly="readonly" id="country" placeholder="Country" name="country" required @if(auth()->user()) value="{{ auth()->user()->country }}" @else value="{{ $temp_user['country'] }}" @endif>
+                              <label for="floatingSelect1">*Country</label>
+                          </div>
+                          <div class="form-floating mb-4">
+                              <input type="text" class="form-control" readonly="readonly" id="postal" placeholder="Postal Code" name="zipcode" required @if(auth()->user()) value="{{ auth()->user()->zipcode }}" @else value="{{ $temp_user['zipcode'] }}" @endif>
+                              <label for="two">*Zip / Postal code</label>
+                          </div>
+                          <div class="form-floating mb-4">
+                              <input type="text" class="form-control" readonly="readonly" id="phone" placeholder="Phone Number" name="phone" required @if(auth()->user()) value="{{ auth()->user()->phone }}" @else value="{{ $temp_user['phone'] }}" @endif>
+                              <label for="two">*Phone</label>
+                          </div>
+                          <div class="form-floating mb-4">
+                              <select class="form-select" style="padding-top: 15px !important;" id="floatingSelect1" aria-label="Options" name="delivery_method" required>
+                                <option value="standard" selected>Standard (£@convert($standard))</option>
+                                <option value="nextday">Next Day (£@convert($nextday))</option>
                               </select>
                               <label for="floatingSelect1">Delivery Options</label>
                           </div>
                           @endif
-                          @if(!session('curr_order')) <button class="btn btn-solid w-100 mb-3" type="submit">Proceed</button> @endif
+                          <input type="text" name="subtotal" value="{{ $total }}" hidden>
+                          <input type="text" name="weight" value="{{ $weight }}" hidden>
+
+                          <button class="btn btn-solid w-100 mb-3" type="submit">Proceed</button>
                       </form>
+                      @endif
 
                       @if(session('curr_order'))
                       <a class="btn btn-solid w-100 mb-3" href="{{ route('processTransaction') }}">Pay with PayPal</a>
@@ -141,9 +231,73 @@
 
                       @endif
                     </div>
-                </div>
             </div>
-    </section>
+        </section>
+      </div>
+
+      <div class="col-md-6 col-12">
+        <section class="payment-method-section">
+          <div class="card">
+            <div class="card-header">
+              <div class="btn btn-link d-flex justify-content-between">
+                  <label for='r_two'>
+                     Order Summary
+                  </label>
+                  @if(!session('curr_order')) <a class="text-danger" href="{{ route('cart') }}">Edit Cart</a> @endif
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- cart items start -->
+              <section class="cart-section pt-0 xl-space">
+                 @if(session('cart'))
+                     @foreach(session('cart') as $id => $details)
+                         <div class="cart-box px-15" data-id="{{ $id }}">
+                             <a href="{{ route('product', $details['slug']) }}" class="cart-img">
+                                 <img src="{{ $details['image'] }}" class="img-fluid" alt="">
+                             </a>
+                             <div class="cart-content">
+                                 <a href="{{ route('product', $details['slug']) }}">
+                                     <h4>{{ $details['name'] }}</h4>
+                                 </a>
+                                 <p>Quantity: {{ $details['quantity'] }}</p>
+                                 <div class="price">
+                                   <h4>£@convert($details['price'])
+                                     <span>(Total: £@convert($details['price'] * $details['quantity']))</span>
+                                   </h4>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="divider"></div>
+                     @endforeach
+                 @endif
+              </section>
+              <!-- cart items end -->
+
+              <!-- order details start -->
+              <section id="order-details" class="px-15 pt-0">
+                  <div class="order-details">
+                      <ul>
+                          <li>
+                              <h4>Items <span>£{{ $total }}</span></h4>
+                          </li>
+
+                          <li>
+                              <h4>Shipping <span> @if($current_order) £@convert($current_order->delivery_fees) @else £@convert($standard) @endif</span></h4>
+                          </li>
+                      </ul>
+                      <div class="total-amount">
+                          <h4>Total Amount <span> @if($current_order) £@convert($current_order->delivery_fees + $total) @else £@convert($standard + $total) @endif</span></h4>
+                      </div>
+                  </div>
+              </section>
+              <div class="divider"></div>
+              <!-- order details end -->
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
 
 
     <!-- panel space start -->

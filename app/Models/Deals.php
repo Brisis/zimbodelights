@@ -12,6 +12,7 @@ class Deals extends Model
     protected $fillable = [
       'name',
       'duration',
+      'link',
       'image'
     ];
 }

@@ -318,10 +318,17 @@ body {
   margin: 0;
   color: #222222;
   background-color: #ffffff; }
-  body::-webkit-scrollbar {
-    width: 0;
-    background: transparent; }
 
+  body::-webkit-scrollbar {
+    width: .8em;
+    height: 8px;
+    background-color: #eee;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background: #aaa;
+    border-radius: 10px;
+  }
 html {
   scroll-behavior: smooth; }
 

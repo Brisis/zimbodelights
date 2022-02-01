@@ -84,11 +84,7 @@
                                       <!-- <td>{{ $banner->subtitle }}</td> -->
                                       <td>{{ $banner->url_link }}</td>
                                       <td class="text-end">
-                                          <a href="#" onclick="event.preventDefault(); document.getElementById('delete-form').submit();" class="btn-sm btn-danger">Delete</a>
-                                          <form id="delete-form" action="{{ route('admin.settings.delete_banner', $banner->id) }}" method="POST" hidden>
-                                              @csrf
-                                              @method('DELETE')
-                                          </form>
+                                          <a href="{{ route('admin.settings.delete_banner', $banner->id) }}" class="btn-sm btn-danger">Delete</a>
                                       </td>
                                   </tr>
                                 @endforeach

@@ -87,7 +87,7 @@
   <div class="divider t-12" style="background-color: #f9b041 !important;"></div>
 
   <!-- category start -->
-  <section class="category-section">
+  <section class="category-section" id="categories">
     <div class="title-section px-15 mt-3">
       <h2 class="text-uppercase">Top Categories</h2>
     </div>
@@ -232,7 +232,7 @@
               <p>Seconds</p>
             </div>
           </div>
-          <a href="{{ route('deals') }}">explore now</a>
+          <a href="{{ $deal->link }}">explore now</a>
         </div>
       </div>
       <div class="banner-img">

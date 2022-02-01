@@ -21,6 +21,10 @@ class CreateOrdersTable extends Migration
             $table->string('buyer_name');
             $table->string('buyer_email');
             $table->text('buyer_address');
+            $table->string('buyer_city');
+            $table->string('buyer_country');
+            $table->string('buyer_zipcode');
+            $table->string('buyer_phone');
             $table->string('status')->default('pending');
             $table->boolean('is_paid')->default(false);
             $table->string('payment_method')->default('Zimbodelights');

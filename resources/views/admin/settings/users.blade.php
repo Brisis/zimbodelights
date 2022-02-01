@@ -20,11 +20,11 @@
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('admin.dashboard') }}">
-                        <i class="bi bi-globe2 small me-2"></i> Dashboard
+                    <a href="{{ route('admin.settings.settings') }}">
+                        <i class="bi bi-globe2 small me-2"></i> Settings
                     </a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Amdin Setup</li>
+                <li class="breadcrumb-item active" aria-current="page">Admin Setup</li>
             </ol>
         </nav>
     </div>

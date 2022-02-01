@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDealsTable extends Migration
+class AddLinkToDealsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateDealsTable extends Migration
      */
     public function up()
     {
-        Schema::create('deals', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('duration');
+        Schema::table('deals', function (Blueprint $table) {
             $table->string('link');
-            $table->string('image');
-            $table->timestamps();
         });
     }
 
@@ -30,6 +25,8 @@ class CreateDealsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deals');
+        Schema::table('deals', function (Blueprint $table) {
+            $table->string('link');
+        });
     }
 }

@@ -5,7 +5,7 @@
     <!-- header start -->
     <header>
         <div class="back-links">
-            <a href="{{ route('home') }}">
+            <a href="{{ route('home') }}#categories">
                 <i class="iconly-Arrow-Left icli"></i>
                 <div class="content">
                     <h2>Continue Shopping <span><i class="iconly-Arrow-Right-2 icli"></i>{{ $category->name }}</span></h2>

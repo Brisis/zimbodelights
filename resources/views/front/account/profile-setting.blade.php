@@ -6,7 +6,7 @@
     <!-- header start -->
     <header>
         <div class="back-links">
-            <a href="{{ route('buyer.dashboard') }}">
+            <a href="javascript:history.back()">
                 <i class="iconly-Arrow-Left icli"></i>
                 <div class="content">
                     <h2>Profile Setting</h2>
@@ -29,6 +29,17 @@
     </section>
     <!-- user avtar end -->
 
+    @if(session('message'))
+      <div class="alert alert-success">
+        {{ session('message') }}
+      </div>
+    @endif
+
+    @if(session('missing'))
+      <div class="alert alert-danger">
+        {{ session('missing') }}
+      </div>
+    @endif
 
     <!-- detail form start -->
     <section class="detail-form-section px-15">
@@ -36,16 +47,42 @@
         <form method="post" action="{{ route('buyer.update_account') }}" id="update-form" enctype="multipart/form-data">
           @csrf
             <div class="form-floating mb-4">
-                <input type="text" class="form-control" id="one" placeholder="Full Name" name="name" value="{{ auth()->user()->name }}">
-                <label for="one">Full Name</label>
+                <input type="text" class="form-control" id="one" placeholder="Full Name" name="name" value="{{ auth()->user()->name }}" required>
+                @error('name') <span style="color:#dc3545">( {{ $message }} )</span> @enderror
+                <label for="one">*Full Name</label>
             </div>
             <div class="form-floating mb-4">
-                <input type="text" class="form-control" id="two" placeholder="Delivery Address" name="address" value="{{ auth()->user()->address }}">
-                <label for="two">Delivery Address</label>
+                <input type="text" class="form-control" id="email" placeholder="Email Address" name="email" value="{{ auth()->user()->email }}" disabled>
+                <label for="one">*Email Address</label>
+            </div>
+            <div class="form-floating mb-4">
+                <input type="text" class="form-control" id="two" placeholder="Delivery Address" name="address" value="{{ auth()->user()->address }}" required>
+                @error('address') <span style="color:#dc3545">( {{ $message }} )</span> @enderror
+                <label for="two">*Delivery Address</label>
+            </div>
+            <div class="form-floating mb-4">
+                <input type="text" class="form-control" id="city" placeholder="City" name="city" value="{{ auth()->user()->city }}" required>
+                @error('city') <span style="color:#dc3545">( {{ $message }} )</span> @enderror
+                <label for="two">*City</label>
+            </div>
+            <div class="form-floating mb-4">
+                @include('front.partials.countries')
+                <label for="floatingSelect1">*Country (selected: {{ auth()->user()->country}})</label>
+            </div>
+            <div class="form-floating mb-4">
+                <input type="text" class="form-control" id="postal" placeholder="Postal Code" name="zipcode" value="{{ auth()->user()->zipcode }}" required>
+                @error('zipcode') <span style="color:#dc3545">( {{ $message }} )</span> @enderror
+                <label for="two">*Zip / Postal code</label>
+            </div>
+            <div class="form-floating mb-4">
+                <input type="text" class="form-control" id="phone" placeholder="Phone Number" name="phone" value="{{ auth()->user()->phone }}" required>
+                @error('phone') <span style="color:#dc3545">( {{ $message }} )</span> @enderror
+                <label for="two">*Phone</label>
             </div>
             <div class="form-floating mb-4">
                 <input type="file" class="form-control" accept="image/*" name="image_path">
-                <label for="three">Account Picture</label>
+                @error('image_path') <span style="color:#dc3545">( {{ $message }} )</span> @enderror
+                <label for="three">Account Picture (optional)</label>
             </div>
         </form>
     </section>
@@ -60,7 +97,7 @@
     <div class="cart-bottom row m-0">
         <div>
             <div class="left-content col-5">
-                <a href="{{ route('buyer.dashboard') }}" class="title-color">BACK</a>
+                <a href="javascript:history.back()" class="title-color">BACK</a>
             </div>
             <a href="#" onclick="event.preventDefault(); document.getElementById('update-form').submit();" class="btn btn-solid col-7 text-uppercase">Save Details</a>
         </div>

@@ -146,12 +146,12 @@
             <h2>Similar Products</h2>
         </div>
         <div class="product-slider slick-default pl-15">
-          @foreach($products as $product)
+          @foreach($products as $related)
             <div>
                 <div class="product-box ratio_square">
                     <div class="img-part">
-                        <a href="{{ route('product', $product->slug) }}"><img src="{{ asset($product->image) }}" alt="" class="img-fluid bg-img"></a>
-                        <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#removecart" onclick="event.preventDefault();" v-on:click="addToCart('{{ $product->id }}')">
+                        <a href="{{ route('product', $related->slug) }}"><img src="{{ asset($related->image) }}" alt="" class="img-fluid bg-img"></a>
+                        <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#removecart" onclick="event.preventDefault();" v-on:click="addToCart('{{ $related->id }}')">
                           <div class="wishlist-btn">
                             <i class="iconly-Heart icli"></i>
                             <i class="iconly-Heart icbo"></i>
@@ -159,13 +159,13 @@
                         </a>
                     </div>
                     <div class="product-content">
-                        <a href="{{ route('product', $product->slug) }}">
-                            <h4>{{ $product->name }}</h4>
+                        <a href="{{ route('product', $related->slug) }}">
+                            <h4>{{ $related->name }}</h4>
                         </a>
                         <div class="price">
-                          <h4>£@convert($product->price)
-                            @if($product->discount)
-                            <del>£@convert($product->price + (($product->price * $product->discount) / 100) )</del><span>{{ $product->discount }}%</span>
+                          <h4>£@convert($related->price)
+                            @if($related->discount)
+                            <del>£@convert($related->price + (($related->price * $related->discount) / 100) )</del><span>{{ $related->discount }}%</span>
                             @endif
                           </h4>
                         </div>
@@ -298,9 +298,9 @@
           qty: 0
         },
         methods: {
-          addToCart: async function (product) {
+          addToCart: async function (related) {
 
-            const response = await axios.get(`/add-to-cart/${product}`);
+            const response = await axios.get(`/add-to-cart/${related}`);
           }
         }
       });
