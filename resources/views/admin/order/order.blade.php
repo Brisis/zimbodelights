@@ -72,6 +72,10 @@
                                     </div>
                                     <div>Name: {{ $order->buyer_name }}</div>
                                     <div>Address: {{ $order->buyer_address }}</div>
+                                    <div>City: {{ $order->buyer_city }}</div>
+                                    <div>Country: {{ $order->buyer_country }}</div>
+                                    <div>Zip Code / Postal Address: {{ $order->buyer_zipcode }}</div>
+                                    <div>Phone Number: {{ $order->buyer_phone }}</div>
                                     <div>
                                         Email: {{ $order->buyer_email }}
                                     </div>
