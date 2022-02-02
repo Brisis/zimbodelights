@@ -1,7 +1,7 @@
 @component('mail::message')
 # Order Received
 
-Dear customer, your order, Order No.:{{order->id}} has been received. We will send another email when it’s on the way home.
+Dear {{ $order->buyer_name }}, your order, Order No. #{{$order->id}} has been received. We will send another email when it’s on the way home.
 
 @component('mail::button', ['url' => $url])
 Download Invoice
