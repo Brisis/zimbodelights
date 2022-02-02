@@ -1,5 +1,5 @@
 @component('mail::message')
-# Order successfully sent
+# Order Received
 
 Dear Admin, {{ $order->buyer_name }} has placed an order.
 

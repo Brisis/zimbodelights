@@ -1,7 +1,7 @@
 @component('mail::message')
-# Order successfully sent
+# Order Delivered
 
-Dear customer, your order was delivered.
+Dear customer, Your order was delivered!
 
 @component('mail::button', ['url' => $url])
 Download Invoice

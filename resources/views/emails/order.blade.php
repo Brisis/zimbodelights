@@ -1,5 +1,5 @@
 @component('mail::message')
-# Order successfully sent
+# Order Sent
 
 Dear customer, your order has been received.
 
