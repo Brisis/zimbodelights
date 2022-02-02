@@ -1,7 +1,7 @@
 @component('mail::message')
 # Order Shipped
 
-Dear customer, Your order has been shipped!
+Dear customer, we’re excited to say that your order, Order No. #{{order->id}} has been shipped. We will send another email when it is delivered.
 
 @component('mail::button', ['url' => $url])
 View Order
