@@ -2,13 +2,13 @@
 
 namespace App\Mail;
 
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Order;
 
-class OrderMail extends Mailable implements ShouldQueue
+class OrderDelivered extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,13 +28,13 @@ class OrderMail extends Mailable implements ShouldQueue
      *
      * @return $this
      */
-    public function build()
-    {
-        return $this->markdown('emails.order', [
-          'order' => $this->order,
-          'url' => route('checkout_prev', $this->order->id)
-        ])
-        ->from('admin@zimbodelights.com', 'ZimboDelights')
-        ->subject('Order from ZimboDelights');
-    }
+     public function build()
+     {
+         return $this->markdown('emails.order_delivered', [
+           'order' => $this->order,
+           'url' => route('checkout_prev', $this->order->id)
+         ])
+         ->from('admin@zimbodelights.com', 'ZimboDelights')
+         ->subject('Order from ZimboDelights');
+     }
 }

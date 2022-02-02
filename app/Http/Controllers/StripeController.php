@@ -11,8 +11,8 @@ use App\Mail\OrderMail;
 use App\Mail\OrderMailAdmin;
 use App\Notifications\InvoicePaid;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Mail;
 use Stripe;
 
 class StripeController extends Controller
@@ -77,6 +77,10 @@ class StripeController extends Controller
         $order->is_paid = true;
         $order->payment_method = 'Stripe/VisaCard/Mastercard';
         $order->save();
+
+        Mail::to($user ? $user->email : $temp_user['email'])->send(new OrderMail($order));
+
+        Mail::to("admin@zimbodelights.com")->send(new OrderMailAdmin($order));
 
         $request->session()->forget('cart');
       }

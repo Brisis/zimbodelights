@@ -2,13 +2,13 @@
 
 namespace App\Mail;
 
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Order;
 
-class OrderMail extends Mailable implements ShouldQueue
+class OrderShipped extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -30,7 +30,7 @@ class OrderMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->markdown('emails.order', [
+        return $this->markdown('emails.order_shipped', [
           'order' => $this->order,
           'url' => route('checkout_prev', $this->order->id)
         ])

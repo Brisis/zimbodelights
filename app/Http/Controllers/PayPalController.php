@@ -11,7 +11,7 @@ use App\Mail\OrderMail;
 use App\Mail\OrderMailAdmin;
 use App\Notifications\InvoicePaid;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Mail;
+use Mail;
 use Illuminate\Http\Request;
 
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
@@ -33,7 +33,7 @@ class PayPalController extends Controller
     }
 
     $cart = session()->get('cart');
-    
+
     $subtotal = $request->subtotal;
     $weight = $request->weight;
 
@@ -200,6 +200,9 @@ class PayPalController extends Controller
         $provider->getAccessToken();
         $response = $provider->capturePaymentOrder($request['token']);
 
+        $temp_user = session()->get('temp_user');
+        $user = auth()->user();
+
         $curr_order = session()->get('curr_order');
 
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
@@ -208,6 +211,10 @@ class PayPalController extends Controller
           $order->is_paid = true;
           $order->payment_method = 'PayPal';
           $order->save();
+
+          Mail::to($user ? $user->email : $temp_user['email'])->send(new OrderMail($order));
+
+          Mail::to("admin@zimbodelights.com")->send(new OrderMailAdmin($order));
 
           $request->session()->forget('cart');
 

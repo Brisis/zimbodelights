@@ -13,6 +13,10 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Carbon;
+use App\Mail\OrderMail;
+use App\Mail\OrderDelivered;
+use App\Mail\OrderShipped;
+use Mail;
 
 class AdminOrderController extends Controller
 {
@@ -41,10 +45,24 @@ class AdminOrderController extends Controller
     ]);
 
     $order->status = $request->status;
+
     if ($request->status == 'delivered') {
       $order->date_delivered = Carbon::today();
     }
+
     $order->save();
+
+    if ($order->status == 'pending') {
+      Mail::to($order->buyer_email)->send(new OrderMail($order));
+    }
+
+    if ($order->status == 'shipped') {
+      Mail::to($order->buyer_email)->send(new OrderShipped($order));
+    }
+
+    if ($request->status == 'delivered') {
+      Mail::to($order->buyer_email)->send(new OrderDelivered($order));
+    }
 
     return redirect()->back();
   }

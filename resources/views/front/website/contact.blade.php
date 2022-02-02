@@ -21,13 +21,13 @@
                   <a target="_blank" href="https://facebook.com/zimbodelights"><img src="{{ asset('static/images/icons/fb.svg') }}" width="22px" class="img-fluid" alt=""></a>
                 </li>
                 <li>
-                  <a target="_blank" href="https://instagram.com/zimbodelights"><img src="{{ asset('static/images/icons/insta.svg') }}" width="22px" class="img-fluid" alt=""></a>
+                  <a target="_blank" href="https://instagram.com/zimbo_delights"><img src="{{ asset('static/images/icons/insta.svg') }}" width="22px" class="img-fluid" alt=""></a>
                 </li>
                 <li>
                   <a target="_blank" href="https://twitter.com/zimbodelights"><img src="{{ asset('static/images/icons/tw.svg') }}" width="22px" class="img-fluid" alt=""></a>
                 </li>
                 <li>
-                  <a target="_blank" href="https://wa.me/447447542016"><img src="{{ asset('static/images/icons/wh.svg') }}" width="22px" class="img-fluid" alt=""></a>
+                  <a target="_blank" href="https://wa.me/447535016221"><img src="{{ asset('static/images/icons/wh.svg') }}" width="22px" class="img-fluid" alt=""></a>
                 </li>
               </ul>
               @else

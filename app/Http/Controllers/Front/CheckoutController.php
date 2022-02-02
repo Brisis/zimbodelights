@@ -164,9 +164,9 @@ class CheckoutController extends Controller
 
     $request->session()->forget('curr_order');
 
-    Mail::to($user ? $user->email : $temp_user['email'])->send(new OrderMail($order));
-
-    Mail::to("admin@zimbodelights.com")->send(new OrderMailAdmin($order));
+    // Mail::to($user ? $user->email : $temp_user['email'])->send(new OrderMail($order));
+    //
+    // Mail::to("admin@zimbodelights.com")->send(new OrderMailAdmin($order));
 
     return view('front.checkout.checkout-done', [
       'order' => $order,
