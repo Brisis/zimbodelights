@@ -31,23 +31,25 @@ class CheckoutController extends Controller
     }
 
     $cart = session()->get('cart');
-    $subtotal = 0;
-    $delivery = 10;
 
     if (!$cart) {
       return redirect()->route('cart');
     }
 
     foreach($cart as $product => $item) {
-      $subtotal += $item['price'] * $item['quantity'];
+      $a_product = Product::find($item['item_id']);
+      if ($a_product->stock == 1) {
+        if(isset($cart[$item['item_id']])) {
+            unset($cart[$request->id]);
+            session()->put('cart', $cart);
+
+            $request->session()->flash('message', $a_product->name.' is out of Stock');
+            return redirect()->back();
+        }
+      }
     }
 
-    $total = $subtotal + $delivery;
-
-
-
     return view('front.checkout.checkout', [
-      'total' => $total,
       'temp_user' => $temp_user
     ]);
   }

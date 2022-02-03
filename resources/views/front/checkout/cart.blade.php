@@ -27,6 +27,14 @@
     </header>
     <!-- header end -->
 
+    @if(session('message'))
+    <section class="cart-section pt-0 top-space xl-space">
+      <div class="theme-color p-4 mb-3 text-center">
+        {{ session('message') }}
+      </div>
+    </section>
+    @endif
+
     @if(session('cart'))
 
     <!-- cart items start -->
