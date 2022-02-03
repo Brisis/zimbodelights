@@ -22,6 +22,11 @@ class CartController extends Controller
       if(!$product) {
           abort(404);
       }
+
+      if ($product->stock == 1) {
+        return redirect()->route('product', $product->slug);
+      }
+
       $cart = session()->get('cart');
       // if cart is empty then this the first product
       if(!$cart) {
@@ -44,6 +49,9 @@ class CartController extends Controller
           $cart[$id]['quantity']++;
 
           $a_product = Product::find($cart[$id]['item_id']);
+          if ($cart[$id]['quantity'] >= $a_product->stock) {
+            return redirect()->route('product', $a_product->slug);
+          }
 
           $cart[$id]['weight'] = $cart[$id]['quantity'] * $a_product->weight;
           session()->put('cart', $cart);
@@ -72,6 +80,9 @@ class CartController extends Controller
           $cart[$request->id]["quantity"] = $request->quantity;
 
           $a_product = Product::find($cart[$request->id]['item_id']);
+          if ($request->quantity >= $a_product->stock) {
+            return redirect()->route('product', $a_product->slug);
+          }
 
           $cart[$request->id]["weight"] = $request->quantity * $a_product->weight;
 

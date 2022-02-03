@@ -84,7 +84,7 @@
                         </td>
                         <td>{{ $product->name }}</td>
                         <td>
-                          @if($product->stock >= 1)
+                          @if($product->stock != 1)
                             <span class="text-success">In Stock</span>
                           @else
                             <span class="text-danger">Out of Stock</span>

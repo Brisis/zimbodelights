@@ -177,6 +177,7 @@
             <div class="product-inline-content">
               <div>
                 <a href="{{ route('product', $product->slug) }}">
+                  @if($product->stock == 1) <span class="text-danger">Out of Stock</span> @endif
                   <h4>{{ $product->name }}</h4>
                 </a>
                 <h5>{{ $product->category->name }}</h5>
@@ -189,14 +190,14 @@
                 </div>
               </div>
             </div>
-
+            @if($product->stock != 1)
               <a href="" data-bs-toggle="offcanvas" data-bs-target="#removecart" onclick="event.preventDefault();" v-on:click="addToCart('{{ $product->id }}')">
-
               <div class="wishlist-btn">
                 <i class="iconly-Heart icli"></i>
                 <i class="iconly-Heart icbo"></i>
               </div>
             </a>
+            @endif
           </div>
         </div>
         @endforeach
@@ -276,16 +277,18 @@
                     <img src="{{ asset($product->image) }}" alt="" class="img-fluid bg-img">
                   </a>
                   <!-- <a href="{{ url('add-to-cart/'.$product->id) }}"> -->
-
+                    @if($product->stock != 1)
                     <a href="" data-bs-toggle="offcanvas" data-bs-target="#removecart" onclick="event.preventDefault();" v-on:click="addToCart('{{ $product->id }}')">
-                    <div class="wishlist-btn">
-                      <i class="iconly-Heart icli"></i>
-                      <i class="iconly-Heart icbo"></i>
-                    </div>
-                  </a>
+                      <div class="wishlist-btn">
+                        <i class="iconly-Heart icli"></i>
+                        <i class="iconly-Heart icbo"></i>
+                      </div>
+                    </a>
+                    @endif
                 </div>
                 <div class="product-content">
                   <a href="{{ route('product', $product->slug) }}">
+                    @if($product->stock == 1) <span class="text-danger">Out of Stock</span> @endif
                     <h4>{{ $product->name }}</h4>
                   </a>
                   <div class="price">
@@ -311,15 +314,18 @@
                   <a href="{{ route('product', $product->slug) }}">
                     <img src="{{ asset($product->image) }}" alt="" class="img-fluid bg-img">
                   </a>
+                  @if($product->stock != 1)
                   <a href="" data-bs-toggle="offcanvas" data-bs-target="#removecart" onclick="event.preventDefault();" v-on:click="addToCart('{{ $product->id }}')">
                     <div class="wishlist-btn">
                       <i class="iconly-Heart icli"></i>
                       <i class="iconly-Heart icbo"></i>
                     </div>
                   </a>
+                  @endif
                 </div>
                 <div class="product-content">
                   <a href="{{ route('product', $product->slug) }}">
+                    @if($product->stock == 1) <span class="text-danger">Out of Stock</span> @endif
                     <h4>{{ $product->name }}</h4>
                   </a>
                   <div class="price">
@@ -344,15 +350,18 @@
                   <a href="{{ route('product', $product->slug) }}">
                     <img src="{{ asset($product->image) }}" alt="" class="img-fluid bg-img">
                   </a>
+                  @if($product->stock != 1)
                   <a href="" data-bs-toggle="offcanvas" data-bs-target="#removecart" onclick="event.preventDefault();" v-on:click="addToCart('{{ $product->id }}')">
                     <div class="wishlist-btn">
                       <i class="iconly-Heart icli"></i>
                       <i class="iconly-Heart icbo"></i>
                     </div>
                   </a>
+                  @endif
                 </div>
                 <div class="product-content">
                   <a href="{{ route('product', $product->slug) }}">
+                    @if($product->stock == 1) <span class="text-danger">Out of Stock</span> @endif
                     <h4>{{ $product->name }}</h4>
                   </a>
                   <div class="price">
@@ -390,15 +399,18 @@
               <a href="{{ route('product', $product->slug) }}">
                 <img src="{{ asset($product->image) }}" alt="" class="img-fluid bg-img">
               </a>
+              @if($product->stock != 1)
               <a href="" data-bs-toggle="offcanvas" data-bs-target="#removecart" onclick="event.preventDefault();" v-on:click="addToCart('{{ $product->id }}')">
                 <div class="wishlist-btn">
                   <i class="iconly-Heart icli"></i>
                   <i class="iconly-Heart icbo"></i>
                 </div>
               </a>
+              @endif
             </div>
             <div class="product-content">
               <a href="{{ route('product', $product->slug) }}">
+                @if($product->stock == 1) <span class="text-danger">Out of Stock</span> @endif
                 <h4>{{ $product->name }}</h4>
               </a>
               <div class="price">

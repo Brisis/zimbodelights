@@ -216,6 +216,16 @@ class PayPalController extends Controller
 
           Mail::to("admin@zimbodelights.com")->send(new OrderMailAdmin($order));
 
+          $cart = session()->get('cart');
+
+          foreach($cart as $product => $item) {
+            $a_product = Product::find($item['item_id']);
+
+            $a_product->stock -= $item['quantity'];
+            $a_product->save();
+          }
+
+
           $request->session()->forget('cart');
 
             return redirect()

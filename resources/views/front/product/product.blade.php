@@ -85,10 +85,13 @@
             {{ session('success') }}
           </div>
           @endif
-        <div class="ml-2">
+        @if($product->stock == 1)
+        <div class="px-15">
+          <p class="text-danger">This product is out of stock</p>
           <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasnotify" class="btn btn-solid"><i class="iconly-Notification icbo"></i> Notify when available</a>
         </div>
         <div class="divider"></div>
+        @endif
 
         <div class="product-detail-box px-15">
             <h4 class="page-title">Customer Reviews ({{ count($reviews) }}) <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasreview">Add Review</a></h4>
@@ -151,15 +154,18 @@
                 <div class="product-box ratio_square">
                     <div class="img-part">
                         <a href="{{ route('product', $related->slug) }}"><img src="{{ asset($related->image) }}" alt="" class="img-fluid bg-img"></a>
+                        @if($related->stock != 1)
                         <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#removecart" onclick="event.preventDefault();" v-on:click="addToCart('{{ $related->id }}')">
                           <div class="wishlist-btn">
                             <i class="iconly-Heart icli"></i>
                             <i class="iconly-Heart icbo"></i>
                           </div>
                         </a>
+                        @endif
                     </div>
                     <div class="product-content">
                         <a href="{{ route('product', $related->slug) }}">
+                          @if($related->stock == 1) <span class="text-danger">Out of Stock</span> @endif
                             <h4>{{ $related->name }}</h4>
                         </a>
                         <div class="price">
@@ -182,18 +188,17 @@
     <section class="panel-space"></section>
     <!-- panel space end -->
 
-
-
-
     <!-- fixed panel start -->
     <div class="fixed-panel">
         <div class="row">
             <div class="col-6">
-                <a href="{{ route('home') }}"><i class="iconly-Home icli"></i>Home</a>
+                <a href="{{ route('home') }}#categories"><i class="iconly-Home icli"></i>Continue Shopping</a>
             </div>
+            @if($product->stock != 1)
             <div class="col-6" id="app-one">
                 <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#removecart" onclick="event.preventDefault();" v-on:click="addToCart('{{ $product->id }}')" class="theme-color"><i class="iconly-Heart icli"></i>ADD TO CART</a>
             </div>
+            @endif
         </div>
     </div>
     <!-- fixed panel end -->

@@ -183,13 +183,23 @@ class CheckoutController extends Controller
       return redirect()->route('home');
     }
 
-    $email = $user ? $user->email : $temp_user['email'];
+    $email = '';
+    if ($user) {
+      $email = $user->email;
+    }
+    elseif ($temp_user && !$user) {
+      $email = $temp_user['email'];
+    }
+    else {
+      return redirect()->route('signin');
+    }
 
     if ($email) {
       if ($order->buyer_email != $email) {
         return redirect()->route('home');
       }
     }
+
 
     return view('front.checkout.checkout-prev', [
       'order' => $order,
