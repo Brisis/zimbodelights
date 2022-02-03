@@ -40,7 +40,7 @@ class CheckoutController extends Controller
       $a_product = Product::find($item['item_id']);
       if ($a_product->stock == 1) {
         if(isset($cart[$item['item_id']])) {
-            unset($cart[$request->id]);
+            unset($cart[$item['item_id']]);
             session()->put('cart', $cart);
 
             $request->session()->flash('message', $a_product->name.' is out of Stock');
