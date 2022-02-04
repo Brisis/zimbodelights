@@ -6,26 +6,15 @@
   <!-- header start -->
   <header>
     <div class="back-links">
-      <a href="{{ route('home') }}">
+      <a href="{{ route('home') }}#categories">
         <i class="iconly-Arrow-Left icli"></i>
         <div class="content">
-          <h2>Order Placed</h2>
+          <h2>Continue Shopping</h2>
         </div>
       </a>
     </div>
   </header>
   <!-- header end -->
-
-
-  <!-- order success section start -->
-  <section class="order-success-section px-15 ">
-    <div>
-      <img src="assets/images/check-circle.gif" class="img-fluid" alt="">
-      <h1>Ordered successfully!</h1>
-      <h2>Payment is successfully processed and your Order is on the way.</h2>
-    </div>
-  </section>
-  <!-- order success section end -->
 
   <section class="my-15">
     <style>
@@ -160,9 +149,9 @@
             <table>
               <tr>
                 <td>
-                  ZimboDelights, Inc.<br />
-                  12345 Sunny Road<br />
-                  London
+                  Zimbo Delights Limited<br />
+                  admin@zimbodelights.com<br />
+                  www.zimbodelights.com
                 </td>
 
                 <td>
@@ -193,7 +182,7 @@
 
         @foreach($products as $product)
         <tr class="item">
-          <td>{{ $product->product->name }} x{{ $product->quantity }}</td>
+          <td>{{ $product->product_name }} x{{ $product->quantity }}</td>
           <td>£@convert($product->price)</td>
         </tr>
         @endforeach
@@ -213,7 +202,7 @@
 
     <div class="card mt-4">
           <div class="text-center mt-4 mb-4">
-              <button onclick="printOrder()" class="btn btn-outline-primary">Download PDF</button>
+              <button onclick="printOrder()" class="btn btn-solid">Download PDF</button>
           </div>
           <script>
             function printOrder() {
@@ -228,17 +217,6 @@
   <section class="panel-space"></section>
   <!-- panel space end -->
 
-
-  <!-- bottom panel start -->
-  <div class="delivery-cart cart-bottom">
-    <div>
-      <div class="left-content">
-        <a href="{{ route('buyer.orders') }}" class="title-color">Track Order</a>
-      </div>
-      <a href="{{ route('home') }}" class="btn btn-solid">Continue shopping</a>
-    </div>
-  </div>
-  <!-- bottom panel end -->
 
 
 @endsection

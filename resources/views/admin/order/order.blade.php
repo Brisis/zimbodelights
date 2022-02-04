@@ -136,7 +136,7 @@
                                         <img src="{{ asset($product->product->image) }}" class="rounded" width="60" alt="...">
                                     </a>
                                 </td>
-                                <td>{{ $product->product->name }}</td>
+                                <td>{{ $product->product_name }}</td>
                                 <td>{{ $product->quantity }}</td>
                                 <td>£@convert($product->product->price)</td>
                                 <td>£@convert($product->price)</td>
@@ -279,11 +279,11 @@
         					<td colspan="2">
         						<table>
         							<tr>
-        								<td>
-        									ZimboDelights, Inc.<br />
-        									12345 Sunny Road<br />
-        									London
-        								</td>
+                        <td>
+                          Zimbo Delights Limited<br />
+                          admin@zimbodelights.com<br />
+                          www.zimbodelights.com
+                        </td>
 
         								<td>
         									{{ $order->buyer_name }}<br />
@@ -313,7 +313,7 @@
 
                 @foreach($products as $product)
         				<tr class="item">
-        					<td>{{ $product->product->name }} x{{ $product->quantity }}</td>
+        					<td>{{ $product->product_name }} x{{ $product->quantity }}</td>
         					<td>£@convert($product->price)</td>
         				</tr>
                 @endforeach

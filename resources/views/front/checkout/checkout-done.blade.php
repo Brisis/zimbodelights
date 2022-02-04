@@ -19,8 +19,8 @@
 
   <!-- order success section start -->
   <section class="order-success-section px-15 ">
-    <div>
-      <img src="assets/images/check-circle.gif" class="img-fluid" alt="">
+    <div class="mt-5">
+      <img src="{{ asset('static/images/check-circle.gif') }}" class="img-fluid" alt="">
       <h1>Ordered successfully!</h1>
       <h2>Payment is successfully processed and your Order is on the way.</h2>
     </div>
@@ -160,9 +160,9 @@
             <table>
               <tr>
                 <td>
-                  ZimboDelights, Inc.<br />
-                  12345 Sunny Road<br />
-                  London
+                  Zimbo Delights Limited<br />
+                  admin@zimbodelights.com<br />
+                  www.zimbodelights.com
                 </td>
 
                 <td>
@@ -193,7 +193,7 @@
 
         @foreach($products as $product)
         <tr class="item">
-          <td>{{ $product->product->name }} x{{ $product->quantity }}</td>
+          <td>{{ $product->product_name }} x{{ $product->quantity }}</td>
           <td>£@convert($product->price)</td>
         </tr>
         @endforeach

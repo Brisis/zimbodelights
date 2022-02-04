@@ -32,7 +32,7 @@ class OrderDelivered extends Mailable
      {
          return $this->markdown('emails.order_delivered', [
            'order' => $this->order,
-           'url' => route('checkout_prev', $this->order->id)
+           'url' => route('checkout_prev', $this->order->slug)
          ])
          ->from('admin@zimbodelights.com', 'ZimboDelights')
          ->subject('Order from ZimboDelights');

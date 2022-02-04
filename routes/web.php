@@ -87,15 +87,14 @@ Route::post('remove-all-from-cart', [CartController::class, 'removeAll'])->name(
 
 //Checkout Routes
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
-//Route::post('/create_order', [CheckoutController::class, 'createOrder'])->name('create_order');
-// Route::get('/pay', [CheckoutController::class, 'pay'])->name('pay');
+
 Route::post('/reset_temp', [CheckoutController::class, 'resetDetails'])->name('reset_temp');
 Route::post('/reset_checkout', [CheckoutController::class, 'resetCheckout'])->name('reset_checkout');
 
 Route::get('/checkout_done', [CheckoutController::class, 'checkoutDone'])->name('checkout_done');
-Route::get('/prev_order/{order}', [CheckoutController::class, 'checkoutPrev'])->name('checkout_prev');
+Route::get('/prev_order/{order:slug}', [CheckoutController::class, 'checkoutPrev'])->name('checkout_prev');
 
-Route::post('/create_order', [PayPalController::class, 'createOrder'])->name('create_order');
+Route::post('/create_order', [CheckoutController::class, 'createOrder'])->name('create_order');
 
 //PayPal Checkout
 Route::get('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');

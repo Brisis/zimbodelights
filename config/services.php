@@ -31,7 +31,7 @@ return [
     ],
 
     'stripe' => [
-        'secret' => 'sk_test_1bOuDMsPbava9TsLWgqd3V4e00m7Txp5wT',
+        'secret' => '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',
     ],
 
 ];
