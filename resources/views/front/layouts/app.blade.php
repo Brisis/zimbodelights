@@ -39,14 +39,16 @@
 </head>
 
 <body>
-  @if(request()->routeIs('home'))
-  <!-- loader strat -->
-  <div class="loader">
-      <span></span>
-      <span></span>
-  </div>
-  <!-- loader end -->
-  @endif
+
+  <!-- @if(request()->routeIs('home'))
+    <!- loader strat ->
+    <div class="loader">
+        <span></span>
+        <span></span>
+    </div>
+    <!- loader end ->
+  @endif -->
+
     @yield('content')
 
     <!-- latest jquery-->

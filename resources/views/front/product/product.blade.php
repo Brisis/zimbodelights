@@ -192,7 +192,7 @@
     <div class="fixed-panel">
         <div class="row">
             <div class="col-6">
-                <a href="{{ route('home') }}#categories"><i class="iconly-Home icli"></i>Continue Shopping</a>
+                <a href="{{ route('home') }}#categories"><i class="iconly-Arrow-Left icli"></i>Continue Shopping</a>
             </div>
             @if($product->stock != 1)
             <div class="col-6" id="app-one">
