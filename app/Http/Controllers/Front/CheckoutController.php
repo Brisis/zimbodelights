@@ -86,18 +86,18 @@ class CheckoutController extends Controller
         $delivery_fees = 3.67;
       }
       if ($del_method == 'nextday') {
-        $total = $subtotal + 3.55;
-        $delivery_fees = 3.55;
+        $total = $subtotal + 4.06;
+        $delivery_fees = 4.06;
       }
     }
     elseif ($weight >= 1000 && $weight <= 2000) {
       if ($del_method == 'standard') {
-        $total = $subtotal + 4.40;
-        $delivery_fees = 4.40;
+        $total = $subtotal + 5.12;
+        $delivery_fees = 5.12;
       }
       if ($del_method == 'nextday') {
-        $total = $subtotal + 5.00;
-        $delivery_fees = 5.00;
+        $total = $subtotal + 5.50;
+        $delivery_fees = 5.50;
       }
     }
     elseif ($weight > 2000 && $weight <= 5000) {
@@ -106,8 +106,8 @@ class CheckoutController extends Controller
         $delivery_fees = 6.64;
       }
       if ($del_method == 'nextday') {
-        $total = $subtotal + 6.40;
-        $delivery_fees = 6.40;
+        $total = $subtotal + 6.90;
+        $delivery_fees = 6.90;
       }
     }
     elseif ($weight > 5000 && $weight <= 10000) {
@@ -116,8 +116,8 @@ class CheckoutController extends Controller
         $delivery_fees = 7.82;
       }
       if ($del_method == 'nextday') {
-        $total = $subtotal + 7.58;
-        $delivery_fees = 7.58;
+        $total = $subtotal + 8.08;
+        $delivery_fees = 8.08;
       }
     }
     else {
@@ -126,8 +126,8 @@ class CheckoutController extends Controller
         $delivery_fees = 9.44;
       }
       if ($del_method == 'nextday') {
-        $total = $subtotal + 9.20;
-        $delivery_fees = 9.20;
+        $total = $subtotal + 9.71;
+        $delivery_fees = 9.71;
       }
     }
 

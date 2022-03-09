@@ -39,23 +39,23 @@
       $standard = 0;
 
       if ($weight < 1000) {
-        $nextday = 3.55;
+        $nextday = 4.06;
         $standard = 3.67;
       }
       elseif ($weight >= 1000 && $weight <= 2000) {
-        $nextday = 5.00;
-        $standard = 4.40;
+        $nextday = 5.50;
+        $standard = 5.12;
       }
       elseif ($weight > 2000 && $weight <= 5000) {
-        $nextday = 6.40;
+        $nextday = 6.90;
         $standard = 6.64;
       }
       elseif ($weight > 5000 && $weight <= 10000) {
-        $nextday = 7.58;
+        $nextday = 8.08;
         $standard = 7.82;
       }
       else {
-        $nextday = 9.20;
+        $nextday = 9.71;
         $standard = 9.44;
       }
 
