@@ -26,10 +26,13 @@
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-end">
-                <a href="./login.html" class="dropdown-item d-flex align-items-center text-danger"
-                   target="_blank">
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item d-flex align-items-center text-danger" >
                     <i class="bi bi-box-arrow-right dropdown-item-icon"></i> Logout
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
+                    @csrf
+                    @method('POST')
+                </form>
             </div>
         </div>
         <ul>
