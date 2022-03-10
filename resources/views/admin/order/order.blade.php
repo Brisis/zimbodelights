@@ -8,6 +8,8 @@
 
 <!-- layout-wrapper -->
 <div class="layout-wrapper">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
     <!-- header -->
     @include('admin.partials.header')
@@ -64,7 +66,7 @@
                         </div>
                     </div>
                     <div class="row g-4">
-                        <div class="col-md-12 col-sm-12">
+                        <div class="col-md-12 col-sm-12 mb-3">
                             <div class="card">
                                 <div class="card-body d-flex flex-column gap-3">
                                     <div class="">
@@ -74,12 +76,38 @@
                                     <div>Address: {{ $order->buyer_address }}</div>
                                     <div>City: {{ $order->buyer_city }}</div>
                                     <div>Country: {{ $order->buyer_country }}</div>
-                                    <div>Zip Code / Postal Address: {{ $order->buyer_zipcode }}</div>
+                                    <div>Post Code: {{ $order->buyer_zipcode }}</div>
                                     <div>Phone Number: {{ $order->buyer_phone }}</div>
                                     <div>
                                         Email: {{ $order->buyer_email }}
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card" id="printBuyerDetails">
+                                <div class="card-body d-flex flex-column gap-3">
+                                    <div class="">
+                                        <h5 class="mb-0">Buyer Print Details</h5>
+                                    </div>
+                                    <div>Name: {{ $order->buyer_name }}</div>
+                                    <div>Address: {{ $order->buyer_address }}</div>
+                                    <div>City: {{ $order->buyer_city }}</div>
+                                    <div>Country: {{ $order->buyer_country }}</div>
+                                    <div>Post Code: {{ $order->buyer_zipcode }}</div>
+                                </div>
+                                <div class="card-footer">
+                                  <div class="text-center mt-4 mb-4">
+                                      <button onclick="printPrintOrder()" class="btn btn-outline-primary">Download Print PDF</button>
+                                  </div>
+                                </div>
+                                <script>
+                                  function printPrintOrder() {
+                                    var element = document.getElementById('printBuyerDetails');
+                                    html2pdf(element);
+                                  }
+                                </script>
                             </div>
                         </div>
                         <!-- <div class="col-md-6 col-sm-12">
@@ -329,7 +357,6 @@
         		</div>
         	</div>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
             <div class="card mt-4">
                   <div class="text-center mt-4 mb-4">
