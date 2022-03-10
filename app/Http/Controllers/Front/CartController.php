@@ -16,7 +16,7 @@ class CartController extends Controller
     return view('front.checkout.cart');
   }
 
-  public function addToCart($id)
+  public function addToCart(Request $request, $id)
   {
       $product = Product::find($id);
       if(!$product) {
@@ -24,7 +24,8 @@ class CartController extends Controller
       }
 
       if ($product->stock == 1) {
-        return redirect()->route('product', $product->slug);
+        $request->session()->flash('message', 'Product out of Stock');
+        return redirect()->route('cart');
       }
 
       $cart = session()->get('cart');
@@ -41,8 +42,10 @@ class CartController extends Controller
                       "image" => $product->image
                   ]
           ];
+
+          $request->session()->flash('message', 'Product added to cart successfully!');
           session()->put('cart', $cart);
-          return redirect()->back()->with('success', 'Product added to cart successfully!');
+          return redirect()->back();
       }
       // if cart not empty then check if this product exist then increment quantity
       if(isset($cart[$id])) {
@@ -50,12 +53,14 @@ class CartController extends Controller
 
           $a_product = Product::find($cart[$id]['item_id']);
           if ($cart[$id]['quantity'] >= $a_product->stock) {
-            return redirect()->route('product', $a_product->slug);
+            $stock = $a_product->stock - 1;
+            $request->session()->flash('message', 'Only '.$stock.' remaining in stock and available for purchase.');
+            return redirect()->route('cart');
           }
 
           $cart[$id]['weight'] = $cart[$id]['quantity'] * $a_product->weight;
           session()->put('cart', $cart);
-          return redirect()->back()->with('success', 'Product added to cart successfully!');
+          return redirect()->back()->with('message', 'Product added to cart successfully!');
       }
       // if item not exist in cart then add to cart with quantity = 1
       $cart[$id] = [
@@ -68,7 +73,7 @@ class CartController extends Controller
           "image" => $product->image
       ];
       session()->put('cart', $cart);
-      return redirect()->back()->with('success', 'Product added to cart successfully!');
+      return redirect()->back()->with('message', 'Product added to cart successfully!');
   }
 
   public function update(Request $request)
@@ -81,14 +86,16 @@ class CartController extends Controller
 
           $a_product = Product::find($cart[$request->id]['item_id']);
           if ($request->quantity >= $a_product->stock) {
-            return redirect()->route('product', $a_product->slug);
+            $stock = $a_product->stock - 1;
+            $request->session()->flash('message', 'Only '.$stock.' remaining in stock and available for purchase.');
+            return redirect()->route('cart');
           }
 
           $cart[$request->id]["weight"] = $request->quantity * $a_product->weight;
 
           session()->put('cart', $cart);
 
-          session()->flash('success', 'Cart updated successfully');
+          session()->flash('message', 'Cart updated successfully');
       }
   }
 
@@ -105,7 +112,7 @@ class CartController extends Controller
               session()->put('cart', $cart);
           }
 
-          session()->flash('success', 'Product removed successfully');
+          session()->flash('message', 'Product removed successfully');
       }
   }
 
@@ -114,7 +121,7 @@ class CartController extends Controller
       if($request->session()->has('cart')) {
           $request->session()->forget('cart');
 
-          session()->flash('success', 'Products removed successfully');
+          session()->flash('message', 'Products removed successfully');
       }
 
       return redirect()->back();
