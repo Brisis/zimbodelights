@@ -51,8 +51,13 @@
 
         <div class="mb-5 col-lg-9 ">
           <div class="card">
-              <div class="card-header">
+              <div class="card-header d-flex justify-content-between">
                 <h5>Category Details</h5>
+                <a href="#" class="btn btn-danger btn-sm" onclick="event.preventDefault(); document.getElementById('delete-form').submit();" class="m-3"><i class="bi bi-trash me-0"></i> Delete</a>
+                <form id="delete-form" action="{{ route('admin.categories.delete_category', $category->id) }}" method="POST" hidden>
+                    @csrf
+                    @method('DELETE')
+                </form>
               </div>
               <div class="card-body">
                   <div class="row">

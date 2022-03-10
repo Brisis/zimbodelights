@@ -150,6 +150,9 @@ function(){
       Route::post('/category/{category}', [AdminCategoryController::class,'updateCategory']);
       Route::get('/add_category', [AdminCategoryController::class,'getAddCategory'])->name("add_category");
       Route::post('/add_category', [AdminCategoryController::class,'addCategory']);
+
+      //Delete Category
+      Route::delete('/{category}/delete_category', [AdminCategoryController::class,'deleteCategory'])->name("delete_category");
     });
 
 

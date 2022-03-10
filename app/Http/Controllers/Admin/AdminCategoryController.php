@@ -26,9 +26,10 @@ class AdminCategoryController extends Controller
 
   public function category(Category $category)
   {
+    $products = Product::where('category_id', $category->id)->paginate(5);
     return view('admin.category.category', [
       'category' => $category,
-      'products' => $category->products
+      'products' => $products
     ]);
   }
 
@@ -95,6 +96,13 @@ class AdminCategoryController extends Controller
     $request->session()->flash('message', 'Category details changed.');
 
     return redirect()->back();
+  }
+
+  public function deleteCategory(Request $request, Category $category)
+  {
+    Category::where('id', $category->id)->delete();
+
+    return redirect()->route('admin.categories.categories');
   }
 
 
