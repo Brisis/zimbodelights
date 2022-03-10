@@ -293,6 +293,9 @@
         methods: {
           addToCart: async function (product) {
             const response = await axios.get(`/add-to-cart/${product}`);
+            if (response.status != 200) {
+              await axios.get('/cart');
+            }
           }
         }
       });
@@ -304,8 +307,10 @@
         },
         methods: {
           addToCart: async function (related) {
-
             const response = await axios.get(`/add-to-cart/${related}`);
+            if (response.status != 200) {
+              await axios.get('/cart');
+            }
           }
         }
       });
