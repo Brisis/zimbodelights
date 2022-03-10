@@ -88,8 +88,8 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="card" id="printBuyerDetails">
                                 <div class="card-body d-flex flex-column gap-3">
-                                    <div class="">
-                                        <h5 class="mb-0">Buyer Print Details</h5>
+                                    <div class="text-center">
+                                        <h5 class="mb-0">Buyer Delivery Details</h5>
                                     </div>
                                     <div>Name: {{ $order->buyer_name }}</div>
                                     <div>Address: {{ $order->buyer_address }}</div>
