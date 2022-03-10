@@ -86,8 +86,8 @@
                         </div>
 
                         <div class="col-md-12 col-sm-12">
-                            <div class="card" id="printBuyerDetails">
-                                <div class="card-body d-flex flex-column gap-3">
+                            <div class="card">
+                                <div class="card-body d-flex flex-column gap-3" id="printBuyerDetails">
                                     <div class="text-center">
                                         <h5 class="mb-0">Buyer Delivery Details</h5>
                                     </div>
