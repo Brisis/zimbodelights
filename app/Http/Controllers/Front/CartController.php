@@ -43,7 +43,7 @@ class CartController extends Controller
                   ]
           ];
 
-          $request->session()->flash('message', 'Product added to cart successfully!');
+          $request->session()->flash('success', 'Product added to cart successfully!');
           session()->put('cart', $cart);
           return redirect()->back();
       }
@@ -60,7 +60,7 @@ class CartController extends Controller
 
           $cart[$id]['weight'] = $cart[$id]['quantity'] * $a_product->weight;
           session()->put('cart', $cart);
-          return redirect()->back()->with('message', 'Product added to cart successfully!');
+          return redirect()->back()->with('success', 'Product added to cart successfully!');
       }
       // if item not exist in cart then add to cart with quantity = 1
       $cart[$id] = [
@@ -73,7 +73,7 @@ class CartController extends Controller
           "image" => $product->image
       ];
       session()->put('cart', $cart);
-      return redirect()->back()->with('message', 'Product added to cart successfully!');
+      return redirect()->back()->with('success', 'Product added to cart successfully!');
   }
 
   public function update(Request $request)
@@ -95,7 +95,7 @@ class CartController extends Controller
 
           session()->put('cart', $cart);
 
-          session()->flash('message', 'Cart updated successfully');
+          session()->flash('success', 'Cart updated successfully');
       }
   }
 
@@ -112,7 +112,7 @@ class CartController extends Controller
               session()->put('cart', $cart);
           }
 
-          session()->flash('message', 'Product removed successfully');
+          session()->flash('success', 'Product removed successfully');
       }
   }
 
@@ -121,7 +121,7 @@ class CartController extends Controller
       if($request->session()->has('cart')) {
           $request->session()->forget('cart');
 
-          session()->flash('message', 'Products removed successfully');
+          session()->flash('success', 'Products removed successfully');
       }
 
       return redirect()->back();

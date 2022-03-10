@@ -35,6 +35,14 @@
     </section>
     @endif
 
+    @if(session('success'))
+    <section class="cart-section pt-0 top-space xl-space">
+      <div class="text-success p-4 mb-3 text-center">
+        {{ session('success') }}
+      </div>
+    </section>
+    @endif
+
     @if(session('cart'))
 
     <!-- cart items start -->
