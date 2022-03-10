@@ -103,6 +103,9 @@
                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("div").find(".quantityf").val()},
                    success: function (response) {
                        window.location.reload();
+                   },
+                   error: function (response) {
+                       window.location.reload();
                    }
                 });
             });
@@ -118,6 +121,9 @@
                         method: "DELETE",
                         data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
                         success: function (response) {
+                            window.location.reload();
+                        },
+                        error: function (response) {
                             window.location.reload();
                         }
                     });
