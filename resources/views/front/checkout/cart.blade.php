@@ -66,15 +66,20 @@
                            <span>(Total: £@convert($details['price'] * $details['quantity']))</span>
                          </h4>
                        </div>
-                       <div class="select-size-sec d-flex justify-content-between">
+                       <div class="select-size-sec">
                            <input type="number" value="{{ $details['quantity'] }}" class="form-control quantityf" style="width: 20%"/>
-                           <div class="">
-                             <button class="btn btn-success btn-sm update-cart" data-id="{{ $id }}"><i class="iconly-Plus icli"></i></button>
-                             <!--<button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $id }}"><i class="iconly-Delete icli"></i></button>-->
-                           </div>
+                           <!-- <div class="">
+
+                             <!-<button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $id }}"><i class="iconly-Delete icli"></i></button>--
+                           </div> -->
                        </div>
-                       <div class="cart-option">
-                           <button class="btn btn-danger btn-sm text-white remove-from-cart" data-id="{{ $id }}" href="#" data-bs-toggle="offcanvas" data-bs-target="#removecart"><i class="iconly-Delete icli"></i>
+                       <div class="cart-option d-flex justify-content-between">
+                            <button class="btn btn-success btn-sm text-white update-cart" data-id="{{ $id }}">
+                              <i class="iconly-Buy icli"></i>
+                              Update
+                            </button>
+                           <button class="btn btn-danger btn-sm text-white remove-from-cart" data-id="{{ $id }}" href="#" data-bs-toggle="offcanvas" data-bs-target="#removecart">
+                             <i class="iconly-Delete icli"></i>
                                Remove
                            </button>
                        </div>
